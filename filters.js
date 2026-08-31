@@ -30,7 +30,7 @@ export function filterScholarships(database, filters, activeGenreFilters) {
         // Optional GPA filter check
         const matchGpa = isNaN(filters.gpa) || item.minGpa <= filters.gpa;
 
-        // Grouped Multi-Select Genre Filtering
+        // Grouped Genre Filtering
         let matchGenre = true;
         if (!activeGenreFilters.includes("all") && activeGenreFilters.length > 0) {
             const fundingFilters = activeGenreFilters.filter(f => f === "fully-funded" || f === "partial");
