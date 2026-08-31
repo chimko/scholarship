@@ -173,7 +173,6 @@
             box-shadow: 0 0 0 3px var(--primary-glow);
         }
 
-        /* Multi-Select Genre Filter Tags */
         .genre-section {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -352,7 +351,6 @@
 
         .btn-apply:hover { opacity: 0.9; }
 
-        /* Pagination Controls */
         .pagination-bar {
             display: flex;
             justify-content: center;
@@ -402,7 +400,6 @@
 <body>
 
     <div class="container">
-        <!-- Top Status Bar -->
         <div class="top-meta-bar">
             <div class="live-badge">
                 <span class="pulse-dot"></span> Universal Global Database Active
@@ -421,7 +418,7 @@
             </div>
         </header>
 
-        <!-- Dynamic Filter Controls -->
+        <!-- Filter Controls -->
         <div class="filter-panel">
             <div class="form-group">
                 <label for="origin">Where do you live? (Nationality)</label>
@@ -448,6 +445,9 @@
                     <option value="Singapore">Singapore</option>
                     <option value="Switzerland">Switzerland</option>
                     <option value="Netherlands">Netherlands</option>
+                    <option value="France">France</option>
+                    <option value="Italy">Italy</option>
+                    <option value="Sweden">Sweden</option>
                 </select>
             </div>
 
@@ -475,11 +475,11 @@
 
             <div class="form-group">
                 <label for="gpa">Min GPA Threshold (Optional)</label>
-                <input type="number" id="gpa" step="0.01" min="0" max="4.0" placeholder="Leave blank for any GPA">
+                <input type="number" id="gpa" step="0.01" min="0" max="4.0" placeholder="Optional filter">
             </div>
         </div>
 
-        <!-- Multi-Select Genre Filter Tags System -->
+        <!-- Genre Tags System -->
         <div class="genre-section">
             <h3>Optional Sorting & Genre Filters (Leave unselected to view all)</h3>
             <div class="genre-tags" id="genreTagsContainer">
@@ -494,7 +494,7 @@
             </div>
         </div>
 
-        <!-- Metric Bar with Items Per Page Selector -->
+        <!-- Metric Bar -->
         <div class="metrics-bar">
             <div id="resultsCount">Loading global matrix...</div>
             <div class="per-page-selector">
@@ -511,7 +511,7 @@
         <!-- Cards Container -->
         <div id="scholarshipGrid" class="scholarship-grid"></div>
 
-        <!-- Pagination Controls Bar -->
+        <!-- Pagination Bar -->
         <div id="paginationBar" class="pagination-bar"></div>
     </div>
 
@@ -536,7 +536,7 @@
             "Uzbekistan", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
         ];
 
-        // Comprehensive Master Database supporting multi-degree arrays (`levels`)
+        // Massive Global Master Database (Expanding across multiple pages)
         const MASTER_DATABASE = [
             {
                 id: "csc-type-a-china",
@@ -741,6 +741,57 @@
                 deadline: "2027-05-01",
                 nextCycleOpening: "2026-11-01",
                 link: "https://www.studyinnl.org/"
+            },
+            {
+                id: "eiffel-fr",
+                name: "Eiffel Excellence Scholarship Program",
+                hostCountry: "France",
+                eligibleOrigins: ["ALL"],
+                levels: ["Postgraduate", "PhD"],
+                disciplines: ["Business & Economics", "Social Sciences", "STEM"],
+                minGpa: 3.30,
+                fullyFunded: true,
+                fundingType: "fully-funded",
+                category: "government",
+                coverage: "Monthly allowance of €1,181 + Airfare + Health Insurance",
+                openingDate: "2026-10-01",
+                deadline: "2027-01-10",
+                nextCycleOpening: "2026-10-01",
+                link: "https://www.campusfrance.org/"
+            },
+            {
+                id: "ma-eci-it",
+                name: "MAECI Italian Government Scholarships",
+                hostCountry: "Italy",
+                eligibleOrigins: ["ALL"],
+                levels: ["Undergraduate", "Postgraduate", "PhD"],
+                disciplines: ["Humanities & Literature", "STEM", "Business & Economics"],
+                minGpa: 2.70,
+                fullyFunded: true,
+                fundingType: "fully-funded",
+                category: "government",
+                coverage: "€900/mo quarterly allowance + Tuition fee exemption",
+                openingDate: "2027-03-01",
+                deadline: "2027-05-31",
+                nextCycleOpening: "2027-03-01",
+                link: "https://studyinitaly.esteri.it/"
+            },
+            {
+                id: "swedish-institute",
+                name: "Swedish Institute Scholarships for Global Professionals",
+                hostCountry: "Sweden",
+                eligibleOrigins: ["ALL"],
+                levels: ["Postgraduate"],
+                disciplines: ["Social Sciences", "STEM", "Business & Economics"],
+                minGpa: 3.00,
+                fullyFunded: true,
+                fundingType: "fully-funded",
+                category: "government",
+                coverage: "Full tuition fee coverage + SEK 12,000/month living stipend",
+                openingDate: "2027-02-01",
+                deadline: "2027-02-28",
+                nextCycleOpening: "2027-02-01",
+                link: "https://si.se/"
             }
         ];
 
@@ -795,9 +846,11 @@
                 const matchTarget = target === "ALL" || item.hostCountry === target;
                 const matchLevel = level === "ALL" || item.levels.includes(level);
                 const matchDiscipline = discipline === "ALL" || item.disciplines.includes(discipline);
+                
+                // GPA is strictly optional: if input is NaN or blank, it bypasses filtering completely
                 const matchGpa = isNaN(gpaInput) || item.minGpa <= gpaInput;
 
-                // Genre filtering: Only filter if "all" is NOT active
+                // Genre filter: only applies if "all" is NOT selected
                 let matchGenre = true;
                 if (!activeGenreFilters.includes("all") && activeGenreFilters.length > 0) {
                     matchGenre = activeGenreFilters.some(genre => {
@@ -822,7 +875,7 @@
             const startIndex = (currentPage - 1) * perPageVal;
             const paginatedItems = perPageVal >= 9999 ? filtered : filtered.slice(startIndex, startIndex + perPageVal);
 
-            let gpaNote = isNaN(gpaInput) ? "" : ` (GPA ≤ ${gpaInput})`;
+            let gpaNote = isNaN(gpaInput) ? " (GPA optional / bypassed)" : ` (GPA ≤ ${gpaInput})`;
             document.getElementById('resultsCount').innerHTML = `Found <strong>${filtered.length}</strong> matching global opportunities${gpaNote} — Page ${currentPage} of ${totalPages}`;
 
             if (filtered.length === 0) {
