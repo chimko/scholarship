@@ -119,10 +119,9 @@ function initMidnightScheduler() {
     const millisTillMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0) - now;
     
     setTimeout(() => {
-        // Runs automatically at midnight every day to refresh day counters and timestamps
         updateSyncTimestamp();
         renderMatrix();
-        initMidnightScheduler(); // Re-schedule for the next midnight
+        initMidnightScheduler();
     }, millisTillMidnight);
 }
 
@@ -132,13 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
     renderMatrix();
     initMidnightScheduler();
 
-    // Event Listeners for Filters
     document.querySelectorAll('.filter-panel select, .filter-panel input, #perPageSelect').forEach(element => {
         element.addEventListener('change', () => { currentPage = 1; renderMatrix(); });
         element.addEventListener('input', () => { currentPage = 1; renderMatrix(); });
     });
 
-    // Genre Tag Multi-Select Handlers
     document.querySelectorAll('.tag-pill').forEach(pill => {
         pill.addEventListener('click', (e) => {
             const filter = e.target.getAttribute('data-filter');
@@ -146,7 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (filter === "all") {
                 activeGenreFilters = ["all"];
                 document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
-                e.target.htmlContent = "";
                 e.target.classList.add('active');
             } else {
                 const allPill = document.querySelector('.tag-pill[data-filter="all"]');
