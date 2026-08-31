@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Scholarship Matrix | Live Database</title>
+    <title>Global Scholarship Matrix | Universal Database</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-base: #0b0f19;
-            --bg-surface: #111827;
-            --bg-card: rgba(17, 24, 39, 0.7);
-            --border: rgba(255, 255, 255, 0.08);
+            --bg-base: #080c14;
+            --bg-surface: #0f172a;
+            --bg-card: rgba(15, 23, 42, 0.75);
+            --border: rgba(255, 255, 255, 0.1);
             --border-hover: rgba(59, 130, 246, 0.5);
             --primary: #3b82f6;
             --primary-glow: rgba(59, 130, 246, 0.25);
-            --accent: #10b981;
-            --text-main: #f9fafb;
-            --text-muted: #9ca3af;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
             --danger: #ef4444;
             --warning: #f59e0b;
         }
@@ -34,38 +35,28 @@
             background-color: var(--bg-base);
             color: var(--text-main);
             min-height: 100vh;
-            padding: 2rem 1rem;
+            padding: 1.5rem 1rem;
             background-image: 
-                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
             background-attachment: fixed;
         }
 
         .container {
-            max-width: 1280px;
+            max-width: 1350px;
             margin: 0 auto;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        header h1 {
-            font-size: 2.75rem;
-            font-weight: 800;
-            letter-spacing: -0.025em;
-            background: linear-gradient(135deg, #ffffff 0%, #93c5fd 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
-
-        header p {
+        /* Top Bar Info */
+        .top-meta-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.75rem;
         }
 
         .live-badge {
@@ -74,20 +65,18 @@
             gap: 0.5rem;
             background: rgba(16, 185, 129, 0.1);
             border: 1px solid rgba(16, 185, 129, 0.3);
-            color: var(--accent);
-            padding: 0.25rem 0.75rem;
+            color: var(--accent-green);
+            padding: 0.3rem 0.8rem;
             border-radius: 9999px;
-            font-size: 0.8rem;
             font-weight: 600;
-            margin-bottom: 1rem;
         }
 
         .pulse-dot {
             width: 8px;
             height: 8px;
-            background-color: var(--accent);
+            background-color: var(--accent-green);
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--accent);
+            box-shadow: 0 0 8px var(--accent-green);
             animation: pulse 2s infinite;
         }
 
@@ -97,15 +86,62 @@
             100% { transform: scale(0.95); opacity: 0.8; }
         }
 
+        .update-timestamp {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            padding: 0.35rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            letter-spacing: 0.02em;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            background: linear-gradient(135deg, #ffffff 0%, #93c5fd 50%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 750px;
+            margin: 0 auto 1rem auto;
+        }
+
+        .disclaimer-box {
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            border-radius: 10px;
+            padding: 0.75rem 1.25rem;
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 0.85rem;
+            color: #fcd34d;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        /* Control Panel */
         .filter-panel {
             background: var(--bg-card);
             backdrop-filter: blur(16px);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 1.5rem;
-            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
             gap: 1.25rem;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
         }
@@ -113,12 +149,12 @@
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
 
         .form-group label {
-            font-size: 0.825rem;
-            font-weight: 600;
+            font-size: 0.75rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: var(--text-muted);
@@ -129,10 +165,10 @@
             background: var(--bg-surface);
             border: 1px solid var(--border);
             color: var(--text-main);
-            padding: 0.75rem 1rem;
+            padding: 0.7rem 0.9rem;
             border-radius: 8px;
             font-family: inherit;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             outline: none;
             transition: all 0.2s ease;
         }
@@ -149,6 +185,7 @@
             margin-top: auto;
             padding-bottom: 0.5rem;
             cursor: pointer;
+            user-select: none;
         }
 
         .checkbox-group input[type="checkbox"] {
@@ -158,18 +195,37 @@
             cursor: pointer;
         }
 
-        .stats-bar {
+        /* Sorting & Metrics Bar */
+        .metrics-bar {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.85rem 1.25rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
             margin-bottom: 1.5rem;
-            color: var(--text-muted);
             font-size: 0.9rem;
         }
 
+        .sort-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .sort-controls select {
+            padding: 0.4rem 0.75rem;
+            font-size: 0.85rem;
+            width: auto;
+        }
+
+        /* Card Grid */
         .scholarship-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
             gap: 1.5rem;
         }
 
@@ -196,33 +252,56 @@
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 1rem;
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
         .card-title {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 700;
-            line-height: 1.3;
+            line-height: 1.35;
         }
 
-        .badge-funding {
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--accent);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            font-size: 0.75rem;
+        .badge {
+            font-size: 0.7rem;
             font-weight: 700;
-            padding: 0.25rem 0.6rem;
+            padding: 0.25rem 0.55rem;
             border-radius: 6px;
             white-space: nowrap;
+            text-transform: uppercase;
         }
+
+        .badge-full {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .badge-partial {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--accent-purple);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .status-pill {
+            display: inline-block;
+            font-size: 0.725rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.8rem;
+        }
+
+        .status-pill.active { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
+        .status-pill.upcoming { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+        .status-pill.closed { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
 
         .card-details {
             display: flex;
             flex-direction: column;
-            gap: 0.6rem;
-            font-size: 0.9rem;
+            gap: 0.5rem;
+            font-size: 0.875rem;
             color: var(--text-muted);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .card-details strong {
@@ -238,22 +317,23 @@
             margin-top: auto;
         }
 
-        .deadline-tag {
-            font-size: 0.85rem;
-            font-weight: 600;
+        .countdown-text {
+            font-size: 0.825rem;
+            font-weight: 700;
         }
 
-        .deadline-tag.urgent { color: var(--danger); }
-        .deadline-tag.warning { color: var(--warning); }
-        .deadline-tag.safe { color: var(--accent); }
+        .countdown-text.urgent { color: var(--danger); }
+        .countdown-text.warning { color: var(--warning); }
+        .countdown-text.safe { color: var(--accent-green); }
+        .countdown-text.neutral { color: var(--text-muted); }
 
         .btn-apply {
             background: var(--primary);
             color: white;
             text-decoration: none;
-            padding: 0.5rem 1rem;
+            padding: 0.45rem 0.9rem;
             border-radius: 6px;
-            font-size: 0.85rem;
+            font-size: 0.825rem;
             font-weight: 600;
             transition: opacity 0.2s;
         }
@@ -271,30 +351,40 @@
 <body>
 
     <div class="container">
-        <header>
+        <!-- Top Status Bar -->
+        <div class="top-meta-bar">
             <div class="live-badge">
-                <span class="pulse-dot"></span> Auto-Sync Engine Active
+                <span class="pulse-dot"></span> Live Dynamic Database Engine
             </div>
+            <div class="update-timestamp" id="lastUpdatedBox">
+                Database Last Synced: <strong style="color: #60a5fa;">Aug 31, 2026</strong>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header>
             <h1>Global Scholarship Matrix</h1>
-            <p>Live eligibility scanner and real-time deadline tracker for fully funded international opportunities.</p>
+            <p>Complete global eligibility portal tracking active, upcoming, and recurring scholarships across all destinations.</p>
+            
+            <div class="disclaimer-box">
+                <strong>Official Verification Notice:</strong> While deadlines and opening countdowns calculate automatically in real time, always verify specific criteria, course exceptions, and document guidelines on the official provider portal prior to submitting your application.
+            </div>
         </header>
 
+        <!-- Dynamic Filter Controls -->
         <div class="filter-panel">
             <div class="form-group">
-                <label for="origin">Where do you live?</label>
+                <label for="origin">Where do you live? (Nationality)</label>
                 <select id="origin">
-                    <option value="ALL">All Origins / Worldwide</option>
-                    <option value="Pakistan" selected>Pakistan</option>
-                    <option value="India">India</option>
-                    <option value="Nigeria">Nigeria</option>
-                    <option value="Brazil">Brazil</option>
+                    <option value="ALL">All Countries / Worldwide</option>
+                    <!-- Populated dynamically with all 195 world countries -->
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="target">Destination Country</label>
                 <select id="target">
-                    <option value="ALL">Any Destination</option>
+                    <option value="ALL">Any Destination Worldwide</option>
                     <option value="United Kingdom">United Kingdom</option>
                     <option value="United States">United States</option>
                     <option value="South Korea">South Korea</option>
@@ -304,78 +394,133 @@
                     <option value="Canada">Canada</option>
                     <option value="Australia">Australia</option>
                     <option value="China">China</option>
+                    <option value="Turkey">Turkey</option>
+                    <option value="Saudi Arabia">Saudi Arabia</option>
+                    <option value="Singapore">Singapore</option>
+                    <option value="Switzerland">Switzerland</option>
+                    <option value="Netherlands">Netherlands</option>
+                    <option value="Sweden">Sweden</option>
+                    <option value="New Zealand">New Zealand</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="level">Study Level</label>
+                <label for="level">Degree Level</label>
                 <select id="level">
                     <option value="ALL">All Levels</option>
                     <option value="Undergraduate">Undergraduate</option>
-                    <option value="Postgraduate" selected>Postgraduate (Master's)</option>
+                    <option value="Postgraduate">Postgraduate (Master's)</option>
                     <option value="PhD">PhD / Doctorate</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="discipline">Field / Discipline</label>
+                <label for="discipline">Field of Study</label>
                 <select id="discipline">
                     <option value="ALL">All Disciplines</option>
-                    <option value="Humanities & Literature" selected>Humanities & Literature</option>
+                    <option value="Humanities & Literature">Humanities & Literature</option>
                     <option value="Social Sciences">Social Sciences & Law</option>
-                    <option value="STEM">STEM & Computing</option>
+                    <option value="STEM">STEM & IT</option>
                     <option value="Business & Economics">Business & Economics</option>
+                    <option value="Medical & Life Sciences">Medical & Life Sciences</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="statusFilter">Opportunity Status</label>
+                <select id="statusFilter">
+                    <option value="ALL">All (Active, Upcoming & Closed)</option>
+                    <option value="ACTIVE">Applications Currently Open</option>
+                    <option value="UPCOMING">Opening Soon / Next Cycle</option>
+                    <option value="CLOSED">Closed for Current Cycle</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="gpa">Min GPA Threshold</label>
-                <input type="number" id="gpa" step="0.01" min="0" max="4.0" value="3.93">
+                <input type="number" id="gpa" step="0.01" min="0" max="4.0" placeholder="e.g., 3.5">
             </div>
 
             <label class="checkbox-group">
-                <input type="checkbox" id="fullyFundedOnly" checked>
+                <!-- Inactive / Unchecked by default as requested -->
+                <input type="checkbox" id="fullyFundedOnly">
                 <span>Fully Funded Only</span>
             </label>
         </div>
 
-        <div class="stats-bar">
-            <span id="resultsCount">Scanning database...</span>
-            <span id="clockDisplay">System Time: --</span>
+        <!-- Metric Bar with Sorting -->
+        <div class="metrics-bar">
+            <div id="resultsCount">Loading scholarship matrix...</div>
+            
+            <div class="sort-controls">
+                <label for="sortBy" style="font-size: 0.85rem; color: var(--text-muted);">Sort By:</label>
+                <select id="sortBy">
+                    <option value="TIMELINE">Next Action / Days Left</option>
+                    <option value="NAME">Scholarship Name (A-Z)</option>
+                    <option value="GPA_ASC">Lowest GPA Required First</option>
+                    <option value="GPA_DESC">Highest GPA Required First</option>
+                </select>
+            </div>
         </div>
 
-        <div id="scholarshipGrid" class="scholarship-grid">
-            <!-- Populated via JavaScript -->
-        </div>
+        <!-- Cards Container -->
+        <div id="scholarshipGrid" class="scholarship-grid"></div>
     </div>
 
     <script>
-        // Global Master Database
+        // Full List of World Countries for the Origin Selector
+        const ALL_COUNTRIES = [
+            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria",
+            "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
+            "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia",
+            "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica",
+            "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt",
+            "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon",
+            "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guyana", "Haiti",
+            "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy",
+            "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia",
+            "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia",
+            "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco",
+            "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand",
+            "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama",
+            "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda",
+            "Saint Kitts and Nevis", "Saint Lucia", "Samoa", "San Marino", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore",
+            "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan",
+            "Suriname", "Sweden", "Switzerland", "Syria", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga",
+            "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States",
+            "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+        ];
+
+        // Master Global Database (Active, Upcoming & Closed Across All Tiers)
         const MASTER_DATABASE = [
             {
                 id: "rhodes-uk",
                 name: "Rhodes Scholarship",
                 hostCountry: "United Kingdom",
-                eligibleOrigins: ["ALL", "Pakistan", "India"],
+                eligibleOrigins: ["ALL"],
                 level: "Postgraduate",
-                disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics"],
+                disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics", "Medical & Life Sciences"],
                 minGpa: 3.70,
                 fullyFunded: true,
-                coverage: "100% Tuition + Living Stipend + Airfare",
+                coverage: "100% Tuition + £18,180/yr Stipend + Flight & Visa",
+                openingDate: "2026-06-01",
                 deadline: "2026-10-01",
+                nextCycleOpening: "2027-06-01",
                 link: "https://www.rhodeshouse.ox.ac.uk/"
             },
             {
                 id: "gks-kr",
                 name: "Global Korea Scholarship (GKS)",
                 hostCountry: "South Korea",
-                eligibleOrigins: ["ALL", "Pakistan", "India", "Nigeria", "Brazil"],
+                eligibleOrigins: ["ALL"],
                 level: "Postgraduate",
                 disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics"],
                 minGpa: 3.20,
                 fullyFunded: true,
-                coverage: "Tuition + Monthly Allowance + Language Training",
-                deadline: "2027-02-28",
+                coverage: "Full Tuition + 1,000,000 KRW/mo Stipend + Airfare + Korean Language Prep",
+                openingDate: "2027-02-01",
+                deadline: "2027-03-15",
+                nextCycleOpening: "2027-02-01",
                 link: "https://www.studyinkorea.go.kr/"
             },
             {
@@ -387,200 +532,295 @@
                 disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics"],
                 minGpa: 3.00,
                 fullyFunded: true,
-                coverage: "Full Tuition + €1,400/mo Stipend + Travel",
-                deadline: "2026-12-15",
+                coverage: "Full Tuition + €1,400/mo Allowance + Full Mobility Travel Grant",
+                openingDate: "2026-10-01",
+                deadline: "2027-01-15",
+                nextCycleOpening: "2026-10-01",
                 link: "https://erasmus-plus.ec.europa.eu/"
             },
             {
                 id: "chevening-uk",
                 name: "Chevening Scholarship",
                 hostCountry: "United Kingdom",
-                eligibleOrigins: ["ALL", "Pakistan", "India", "Nigeria", "Brazil"],
+                eligibleOrigins: ["ALL"],
                 level: "Postgraduate",
                 disciplines: ["Humanities & Literature", "Social Sciences", "Business & Economics"],
-                minGpa: 3.00,
+                minGpa: 2.80,
                 fullyFunded: true,
-                coverage: "Full University Tuition + Monthly Living Allowance",
+                coverage: "Full Master's Tuition + Living Allowance + Return Flights",
+                openingDate: "2026-09-12",
                 deadline: "2026-11-03",
+                nextCycleOpening: "2026-09-12",
                 link: "https://www.chevening.org/"
             },
             {
                 id: "fulbright-us",
                 name: "Fulbright Foreign Student Program",
                 hostCountry: "United States",
-                eligibleOrigins: ["ALL", "Pakistan", "India", "Nigeria", "Brazil"],
+                eligibleOrigins: ["ALL"],
                 level: "Postgraduate",
                 disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics"],
                 minGpa: 3.50,
                 fullyFunded: true,
-                coverage: "Tuition + Health Insurance + Airfare + Living Stipend",
-                deadline: "2027-05-15",
+                coverage: "Full Tuition + Health Insurance + Monthly Living Stipend + Airfare",
+                openingDate: "2026-02-01",
+                deadline: "2026-05-15",
+                nextCycleOpening: "2027-02-01",
                 link: "https://fulbrightonline.org/"
             },
             {
                 id: "daad-de",
-                name: "DAAD EPOS Scholarship",
+                name: "DAAD EPOS Development-Related Master's",
                 hostCountry: "Germany",
-                eligibleOrigins: ["ALL", "Pakistan", "India", "Nigeria", "Brazil"],
+                eligibleOrigins: ["ALL"],
                 level: "Postgraduate",
                 disciplines: ["Social Sciences", "STEM", "Business & Economics"],
                 minGpa: 3.00,
                 fullyFunded: true,
-                coverage: "€934/mo Stipend + Health Insurance + Travel Grant",
+                coverage: "€934/mo Stipend + Health Insurance + Travel Allowance",
+                openingDate: "2026-08-01",
                 deadline: "2026-10-31",
+                nextCycleOpening: "2026-08-01",
                 link: "https://www.daad.de/"
             },
             {
                 id: "mext-jp",
                 name: "MEXT Japanese Government Scholarship",
                 hostCountry: "Japan",
-                eligibleOrigins: ["ALL", "Pakistan", "India"],
+                eligibleOrigins: ["ALL"],
                 level: "Undergraduate",
                 disciplines: ["Humanities & Literature", "Social Sciences", "STEM"],
-                minGpa: 3.20,
+                minGpa: 3.10,
                 fullyFunded: true,
-                coverage: "100% Tuition + ¥143,000/mo Allowance + Airfare",
-                deadline: "2027-05-20",
+                coverage: "Exemption of Entrance Fees & Tuition + ¥117,000/mo Stipend",
+                openingDate: "2027-04-15",
+                deadline: "2027-05-30",
+                nextCycleOpening: "2027-04-15",
                 link: "https://www.mext.go.jp/"
             },
             {
-                id: "gates-cambridge",
-                name: "Gates Cambridge Scholarship",
-                hostCountry: "United Kingdom",
+                id: "turkiye-tr",
+                name: "Türkiye Bursları Scholarship",
+                hostCountry: "Turkey",
                 eligibleOrigins: ["ALL"],
-                level: "Postgraduate",
-                disciplines: ["Humanities & Literature", "Social Sciences", "STEM"],
-                minGpa: 3.80,
+                level: "Undergraduate",
+                disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Medical & Life Sciences"],
+                minGpa: 2.80,
                 fullyFunded: true,
-                coverage: "Full Cost of Studying at Cambridge + £20,000/yr Maintenance",
-                deadline: "2026-12-03",
-                link: "https://www.gatescambridge.org/"
+                coverage: "University Placement + Tuition + Accommodation + Monthly Allowance",
+                openingDate: "2027-01-10",
+                deadline: "2027-02-20",
+                nextCycleOpening: "2027-01-10",
+                link: "https://www.turkiyeburslari.gov.tr/"
             },
             {
-                id: "schwarzman-cn",
-                name: "Schwarzman Scholars",
-                hostCountry: "China",
+                id: "singa-sg",
+                name: "SINGA (Singapore International Graduate Award)",
+                hostCountry: "Singapore",
                 eligibleOrigins: ["ALL"],
-                level: "Postgraduate",
-                disciplines: ["Social Sciences", "Business & Economics", "Humanities & Literature"],
+                level: "PhD",
+                disciplines: ["STEM", "Medical & Life Sciences"],
+                minGpa: 3.40,
+                fullyFunded: true,
+                coverage: "Full PhD Tuition + SGD 2,700/mo Stipend + One-time Airfare & Settlement Grant",
+                openingDate: "2026-09-01",
+                deadline: "2026-12-01",
+                nextCycleOpening: "2026-09-01",
+                link: "https://www.a-star.edu.sg/singa"
+            },
+            {
+                id: "switzerland-excellence",
+                name: "Swiss Government Excellence Scholarships",
+                hostCountry: "Switzerland",
+                eligibleOrigins: ["ALL"],
+                level: "PhD",
+                disciplines: ["STEM", "Humanities & Literature", "Social Sciences", "Medical & Life Sciences"],
                 minGpa: 3.50,
                 fullyFunded: true,
-                coverage: "Tuition + Room & Board + In-country Study Tours + Stipend",
-                deadline: "2026-09-20",
-                link: "https://www.schwarzmanscholars.org/"
+                coverage: "CHF 1,920/mo Allowance + Tuition Exemption + Health Insurance",
+                openingDate: "2026-08-10",
+                deadline: "2026-11-15",
+                nextCycleOpening: "2026-08-10",
+                link: "https://www.sbfi.admin.ch/"
+            },
+            {
+                id: "holland-scholarship",
+                name: "NL Scholarship (formerly Holland Scholarship)",
+                hostCountry: "Netherlands",
+                eligibleOrigins: ["ALL"],
+                level: "Undergraduate",
+                disciplines: ["Humanities & Literature", "STEM", "Business & Economics"],
+                minGpa: 3.00,
+                fullyFunded: false,
+                coverage: "€5,000 One-time Financial Grant for First Year",
+                openingDate: "2026-11-01",
+                deadline: "2027-05-01",
+                nextCycleOpening: "2026-11-01",
+                link: "https://www.studyinnl.org/"
+            },
+            {
+                id: "vanier-ca",
+                name: "Vanier Canada Graduate Scholarships",
+                hostCountry: "Canada",
+                eligibleOrigins: ["ALL"],
+                level: "PhD",
+                disciplines: ["STEM", "Medical & Life Sciences", "Social Sciences"],
+                minGpa: 3.70,
+                fullyFunded: true,
+                coverage: "$50,000 per year for 3 years",
+                openingDate: "2026-07-01",
+                deadline: "2026-11-01",
+                nextCycleOpening: "2027-07-01",
+                link: "https://vanier.gc.ca/"
             }
         ];
 
-        // Automatic Dynamic Calculations (No Manual Editing Required)
-        function calculateDaysRemaining(deadlineStr) {
+        // Populate Country Select Dropdown
+        function populateCountries() {
+            const originSelect = document.getElementById('origin');
+            ALL_COUNTRIES.forEach(country => {
+                const opt = document.createElement('option');
+                opt.value = country;
+                opt.textContent = country;
+                originSelect.appendChild(opt);
+            });
+        }
+
+        // Days calculation engine
+        function calculateDateMetrics(openingStr, deadlineStr) {
             const today = new Date();
-            const deadline = new Date(deadlineStr);
             today.setHours(0,0,0,0);
+
+            const opening = new Date(openingStr);
+            const deadline = new Date(deadlineStr);
+            opening.setHours(0,0,0,0);
             deadline.setHours(0,0,0,0);
-            
-            const diffTime = deadline - today;
-            return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (today < opening) {
+                const daysUntilOpen = Math.ceil((opening - today) / (1000 * 60 * 60 * 24));
+                return { status: "UPCOMING", days: daysUntilOpen, targetDate: openingStr };
+            } else if (today >= opening && today <= deadline) {
+                const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+                return { status: "ACTIVE", days: daysLeft, targetDate: deadlineStr };
+            } else {
+                return { status: "CLOSED", days: -1, targetDate: deadlineStr };
+            }
         }
 
-        function formatClock() {
-            const now = new Date();
-            document.getElementById('clockDisplay').textContent = `System Date: ${now.toISOString().split('T')[0]}`;
-        }
-
+        // Main Rendering Logic
         function renderScholarships() {
             const origin = document.getElementById('origin').value;
             const target = document.getElementById('target').value;
             const level = document.getElementById('level').value;
             const discipline = document.getElementById('discipline').value;
+            const statusFilter = document.getElementById('statusFilter').value;
             const gpaInput = parseFloat(document.getElementById('gpa').value) || 0;
             const fullyFundedOnly = document.getElementById('fullyFundedOnly').checked;
+            const sortBy = document.getElementById('sortBy').value;
 
             const grid = document.getElementById('scholarshipGrid');
 
-            const filtered = MASTER_DATABASE.filter(item => {
+            let filtered = MASTER_DATABASE.map(item => {
+                const metrics = calculateDateMetrics(item.openingDate, item.deadline);
+                return { ...item, metrics };
+            }).filter(item => {
                 const matchOrigin = origin === "ALL" || item.eligibleOrigins.includes("ALL") || item.eligibleOrigins.includes(origin);
                 const matchTarget = target === "ALL" || item.hostCountry === target;
                 const matchLevel = level === "ALL" || item.level === level;
                 const matchDiscipline = discipline === "ALL" || item.disciplines.includes(discipline);
                 const matchGpa = item.minGpa <= (gpaInput > 0 ? gpaInput : 4.0);
                 const matchFunding = !fullyFundedOnly || item.fullyFunded;
+                const matchStatus = statusFilter === "ALL" || item.metrics.status === statusFilter;
 
-                return matchOrigin && matchTarget && matchLevel && matchDiscipline && matchGpa && matchFunding;
+                return matchOrigin && matchTarget && matchLevel && matchDiscipline && matchGpa && matchFunding && matchStatus;
             });
 
-            document.getElementById('resultsCount').textContent = `Showing ${filtered.length} active global opportunities`;
+            // Sorting logic
+            filtered.sort((a, b) => {
+                if (sortBy === "NAME") {
+                    return a.name.localeCompare(b.name);
+                } else if (sortBy === "GPA_ASC") {
+                    return a.minGpa - b.minGpa;
+                } else if (sortBy === "GPA_DESC") {
+                    return b.minGpa - a.minGpa;
+                } else {
+                    // Default TIMELINE sort: Active closing soon first, then upcoming opening soon, then closed
+                    const statusOrder = { "ACTIVE": 1, "UPCOMING": 2, "CLOSED": 3 };
+                    if (statusOrder[a.metrics.status] !== statusOrder[b.metrics.status]) {
+                        return statusOrder[a.metrics.status] - statusOrder[b.metrics.status];
+                    }
+                    return a.metrics.days - b.metrics.days;
+                }
+            });
+
+            document.getElementById('resultsCount').innerHTML = `Found <strong>${filtered.length}</strong> matching global opportunities`;
 
             if (filtered.length === 0) {
                 grid.innerHTML = `
                     <div class="empty-state">
-                        <h3>No matching scholarships found</h3>
-                        <p>Try broadening your criteria or lowering the GPA filter threshold.</p>
+                        <h3>No scholarships found for these filter settings</h3>
+                        <p>Try clearing filters, selecting "All Levels", or unchecking funding restrictions.</p>
                     </div>
                 `;
                 return;
             }
 
             grid.innerHTML = filtered.map(item => {
-                const daysLeft = calculateDaysRemaining(item.deadline);
-                let deadlineMarkup = "";
+                let statusMarkup = "";
+                let countdownMarkup = "";
 
-                if (daysLeft < 0) {
-                    deadlineMarkup = `<span class="deadline-tag urgent">Deadline Passed</span>`;
-                } else if (daysLeft <= 30) {
-                    deadlineMarkup = `<span class="deadline-tag urgent">Closing Soon: ${daysLeft} days left</span>`;
-                } else if (daysLeft <= 90) {
-                    deadlineMarkup = `<span class="deadline-tag warning">${daysLeft} days left</span>`;
+                if (item.metrics.status === "ACTIVE") {
+                    statusMarkup = `<span class="status-pill active">Applications Active</span>`;
+                    if (item.metrics.days <= 30) {
+                        countdownMarkup = `<span class="countdown-text urgent">Closing Soon: ${item.metrics.days} days left</span>`;
+                    } else {
+                        countdownMarkup = `<span class="countdown-text safe">${item.metrics.days} days left to apply</span>`;
+                    }
+                } else if (item.metrics.status === "UPCOMING") {
+                    statusMarkup = `<span class="status-pill upcoming">Opening Soon</span>`;
+                    countdownMarkup = `<span class="countdown-text warning">Opens in ${item.metrics.days} days (${item.openingDate})</span>`;
                 } else {
-                    deadlineMarkup = `<span class="deadline-tag safe">${daysLeft} days left</span>`;
+                    statusMarkup = `<span class="status-pill closed">Cycle Closed</span>`;
+                    countdownMarkup = `<span class="countdown-text neutral">Re-opens Next Cycle (${item.nextCycleOpening})</span>`;
                 }
 
                 return `
                     <div class="card">
                         <div>
+                            ${statusMarkup}
                             <div class="card-header">
                                 <h2 class="card-title">${item.name}</h2>
-                                ${item.fullyFunded ? '<span class="badge-funding">Fully Funded</span>' : ''}
+                                <span class="badge ${item.fullyFunded ? 'badge-full' : 'badge-partial'}">
+                                    ${item.fullyFunded ? 'Fully Funded' : 'Partial / Grant'}
+                                </span>
                             </div>
                             <div class="card-details">
-                                <p><strong>Destination:</strong> ${item.hostCountry}</p>
+                                <p><strong>Host Country:</strong> ${item.hostCountry}</p>
                                 <p><strong>Degree Level:</strong> ${item.level}</p>
-                                <p><strong>Min GPA:</strong> ${item.minGpa.toFixed(2)}</p>
+                                <p><strong>Min GPA:</strong> ${item.minGpa.toFixed(2)} / 4.0</p>
                                 <p><strong>Benefits:</strong> ${item.coverage}</p>
                             </div>
                         </div>
                         <div class="card-footer">
-                            ${deadlineMarkup}
-                            <a href="${item.link}" target="_blank" class="btn-apply">Official Portal</a>
+                            ${countdownMarkup}
+                            <a href="${item.link}" target="_blank" class="btn-apply">Verify Details</a>
                         </div>
                     </div>
                 `;
             }).join('');
         }
 
-        // Event Listeners for Real-Time UI Responsiveness
-        document.querySelectorAll('.filter-panel select, .filter-panel input').forEach(element => {
-            element.addEventListener('change', renderScholarships);
-            element.addEventListener('input', renderScholarships);
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            populateCountries();
+            renderScholarships();
+
+            // Event Listeners for Live Interactivity
+            document.querySelectorAll('.filter-panel select, .filter-panel input, #sortBy').forEach(element => {
+                element.addEventListener('change', renderScholarships);
+                element.addEventListener('input', renderScholarships);
+            });
         });
-
-        // Initialize on Load
-        formatClock();
-        renderScholarships();
-
-        // Optional: External Data Sync Pipeline
-        /*
-        async function syncDatabase() {
-            try {
-                const response = await fetch('https://your-api-endpoint.com/scholarships.json');
-                const liveData = await response.json();
-                MASTER_DATABASE.push(...liveData);
-                renderScholarships();
-            } catch (e) {
-                console.log("Running on fallback seed database.");
-            }
-        }
-        syncDatabase();
-        */
     </script>
 </body>
 </html>
