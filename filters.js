@@ -27,7 +27,7 @@ export function filterScholarships(database, filters, activeGenreFilters) {
         const matchLevel = filters.level === "ALL" || item.levels.includes(filters.level);
         const matchDiscipline = filters.discipline === "ALL" || item.disciplines.includes(filters.discipline);
         
-        // Optional GPA: Bypasses if blank/NaN
+        // Optional GPA filter check
         const matchGpa = isNaN(filters.gpa) || item.minGpa <= filters.gpa;
 
         // Grouped Multi-Select Genre Filtering
