@@ -357,7 +357,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
             margin-bottom: 3rem;
             flex-wrap: wrap;
         }
@@ -479,9 +479,9 @@
             </div>
         </div>
 
-        <!-- Multi-Select Anime-Style Genre Filter Tags System -->
+        <!-- Multi-Select Genre Filter Tags System -->
         <div class="genre-section">
-            <h3>Multi-Select Categories & Funding Genres (Click to Combine)</h3>
+            <h3>Optional Sorting & Genre Filters (Leave unselected to view all)</h3>
             <div class="genre-tags" id="genreTagsContainer">
                 <div class="tag-pill active" data-filter="all">All Genres</div>
                 <div class="tag-pill" data-filter="fully-funded">Fully Funded</div>
@@ -501,8 +501,8 @@
                 <label for="perPageSelect">Show per page:</label>
                 <select id="perPageSelect">
                     <option value="6">6</option>
-                    <option value="12">12</option>
-                    <option value="24" selected>24</option>
+                    <option value="12" selected>12</option>
+                    <option value="24">24</option>
                     <option value="9999">All</option>
                 </select>
             </div>
@@ -793,14 +793,11 @@
             }).filter(item => {
                 const matchOrigin = origin === "ALL" || item.eligibleOrigins.includes("ALL") || item.eligibleOrigins.includes(origin);
                 const matchTarget = target === "ALL" || item.hostCountry === target;
-                
-                // Supports multi-degree checking (if item.levels includes selected level)
                 const matchLevel = level === "ALL" || item.levels.includes(level);
-                
                 const matchDiscipline = discipline === "ALL" || item.disciplines.includes(discipline);
                 const matchGpa = isNaN(gpaInput) || item.minGpa <= gpaInput;
 
-                // Multi-select genre logic
+                // Genre filtering: Only filter if "all" is NOT active
                 let matchGenre = true;
                 if (!activeGenreFilters.includes("all") && activeGenreFilters.length > 0) {
                     matchGenre = activeGenreFilters.some(genre => {
@@ -905,7 +902,7 @@
             window.scrollTo({ top: 400, behavior: 'smooth' });
         }
 
-        // Multi-Select Genre Click Handlers
+        // Genre Click Handlers
         document.querySelectorAll('.tag-pill').forEach(pill => {
             pill.addEventListener('click', (e) => {
                 const filter = e.target.getAttribute('data-filter');
