@@ -501,8 +501,8 @@
                 <label for="perPageSelect">Show per page:</label>
                 <select id="perPageSelect">
                     <option value="6">6</option>
-                    <option value="12" selected>12</option>
-                    <option value="24">24</option>
+                    <option value="12">12</option>
+                    <option value="24" selected>24</option>
                     <option value="9999">All</option>
                 </select>
             </div>
@@ -536,14 +536,14 @@
             "Uzbekistan", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
         ];
 
-        // Extended Universal Master Database with Active, Upcoming & Closed items across categories
+        // Comprehensive Master Database supporting multi-degree arrays (`levels`)
         const MASTER_DATABASE = [
             {
                 id: "csc-type-a-china",
                 name: "Chinese Government Scholarship (CSC Type A)",
                 hostCountry: "China",
                 eligibleOrigins: ["ALL"],
-                level: "Postgraduate",
+                levels: ["Undergraduate", "Postgraduate", "PhD"],
                 disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics", "Medical & Life Sciences"],
                 minGpa: 2.80,
                 fullyFunded: true,
@@ -560,7 +560,7 @@
                 name: "Rhodes Scholarship",
                 hostCountry: "United Kingdom",
                 eligibleOrigins: ["ALL"],
-                level: "Postgraduate",
+                levels: ["Postgraduate", "PhD"],
                 disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics"],
                 minGpa: 3.70,
                 fullyFunded: true,
@@ -577,7 +577,7 @@
                 name: "Global Korea Scholarship (GKS)",
                 hostCountry: "South Korea",
                 eligibleOrigins: ["ALL"],
-                level: "Postgraduate",
+                levels: ["Undergraduate", "Postgraduate"],
                 disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics"],
                 minGpa: 3.20,
                 fullyFunded: true,
@@ -594,7 +594,7 @@
                 name: "Fulbright Foreign Student Program",
                 hostCountry: "United States",
                 eligibleOrigins: ["ALL"],
-                level: "Postgraduate",
+                levels: ["Postgraduate", "PhD"],
                 disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics"],
                 minGpa: 3.50,
                 fullyFunded: true,
@@ -611,7 +611,7 @@
                 name: "Erasmus Mundus Joint Masters",
                 hostCountry: "Europe (Multi-Country)",
                 eligibleOrigins: ["ALL"],
-                level: "Postgraduate",
+                levels: ["Postgraduate"],
                 disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics"],
                 minGpa: 3.00,
                 fullyFunded: true,
@@ -628,7 +628,7 @@
                 name: "DAAD EPOS Development-Related Master's",
                 hostCountry: "Germany",
                 eligibleOrigins: ["ALL"],
-                level: "Postgraduate",
+                levels: ["Postgraduate", "PhD"],
                 disciplines: ["Social Sciences", "STEM", "Business & Economics"],
                 minGpa: 3.00,
                 fullyFunded: true,
@@ -645,7 +645,7 @@
                 name: "MEXT Japanese Government Scholarship",
                 hostCountry: "Japan",
                 eligibleOrigins: ["ALL"],
-                level: "Undergraduate",
+                levels: ["Undergraduate", "Postgraduate", "PhD"],
                 disciplines: ["Humanities & Literature", "Social Sciences", "STEM"],
                 minGpa: 3.10,
                 fullyFunded: true,
@@ -662,7 +662,7 @@
                 name: "Türkiye Bursları Scholarship",
                 hostCountry: "Turkey",
                 eligibleOrigins: ["ALL"],
-                level: "Undergraduate",
+                levels: ["Undergraduate", "Postgraduate", "PhD"],
                 disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Medical & Life Sciences"],
                 minGpa: 2.80,
                 fullyFunded: true,
@@ -679,7 +679,7 @@
                 name: "SINGA (Singapore International Graduate Award)",
                 hostCountry: "Singapore",
                 eligibleOrigins: ["ALL"],
-                level: "PhD",
+                levels: ["PhD"],
                 disciplines: ["STEM", "Medical & Life Sciences"],
                 minGpa: 3.40,
                 fullyFunded: true,
@@ -696,7 +696,7 @@
                 name: "Chevening Scholarship",
                 hostCountry: "United Kingdom",
                 eligibleOrigins: ["ALL"],
-                level: "Postgraduate",
+                levels: ["Postgraduate"],
                 disciplines: ["Humanities & Literature", "Social Sciences", "Business & Economics"],
                 minGpa: 2.80,
                 fullyFunded: true,
@@ -713,7 +713,7 @@
                 name: "Swiss Government Excellence Scholarships",
                 hostCountry: "Switzerland",
                 eligibleOrigins: ["ALL"],
-                level: "PhD",
+                levels: ["Postgraduate", "PhD"],
                 disciplines: ["STEM", "Humanities & Literature", "Social Sciences", "Medical & Life Sciences"],
                 minGpa: 3.50,
                 fullyFunded: true,
@@ -730,7 +730,7 @@
                 name: "NL Scholarship (formerly Holland Scholarship)",
                 hostCountry: "Netherlands",
                 eligibleOrigins: ["ALL"],
-                level: "Undergraduate",
+                levels: ["Undergraduate", "Postgraduate"],
                 disciplines: ["Humanities & Literature", "STEM", "Business & Economics"],
                 minGpa: 3.00,
                 fullyFunded: false,
@@ -793,7 +793,10 @@
             }).filter(item => {
                 const matchOrigin = origin === "ALL" || item.eligibleOrigins.includes("ALL") || item.eligibleOrigins.includes(origin);
                 const matchTarget = target === "ALL" || item.hostCountry === target;
-                const matchLevel = level === "ALL" || item.level === level;
+                
+                // Supports multi-degree checking (if item.levels includes selected level)
+                const matchLevel = level === "ALL" || item.levels.includes(level);
+                
                 const matchDiscipline = discipline === "ALL" || item.disciplines.includes(discipline);
                 const matchGpa = isNaN(gpaInput) || item.minGpa <= gpaInput;
 
@@ -822,7 +825,7 @@
             const startIndex = (currentPage - 1) * perPageVal;
             const paginatedItems = perPageVal >= 9999 ? filtered : filtered.slice(startIndex, startIndex + perPageVal);
 
-            let gpaNote = isNaN(gpaInput) ? " (GPA optional)" : ` (GPA ≤ ${gpaInput})`;
+            let gpaNote = isNaN(gpaInput) ? "" : ` (GPA ≤ ${gpaInput})`;
             document.getElementById('resultsCount').innerHTML = `Found <strong>${filtered.length}</strong> matching global opportunities${gpaNote} — Page ${currentPage} of ${totalPages}`;
 
             if (filtered.length === 0) {
@@ -864,7 +867,7 @@
                             </div>
                             <div class="card-details">
                                 <p><strong>Host Country:</strong> ${item.hostCountry}</p>
-                                <p><strong>Degree Level:</strong> ${item.level}</p>
+                                <p><strong>Degree Levels:</strong> ${item.levels.join(', ')}</p>
                                 <p><strong>Min GPA Required:</strong> ${item.minGpa.toFixed(2)} / 4.0</p>
                                 <p><strong>Benefits:</strong> ${item.coverage}</p>
                             </div>
@@ -878,7 +881,7 @@
             }).join('');
 
             // Render Pagination Buttons
-            if (perPageVal >= 9999) {
+            if (perPageVal >= 9999 || totalPages <= 1) {
                 paginationBar.innerHTML = "";
             } else {
                 let paginationHTML = `
