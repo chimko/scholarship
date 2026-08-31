@@ -41,7 +41,7 @@ function renderMatrix() {
     const paginatedItems = perPageVal >= 9999 ? filtered : filtered.slice(startIndex, startIndex + perPageVal);
 
     let gpaNote = isNaN(gpa) ? " (GPA optional / bypassed)" : ` (GPA ≤ ${gpa})`;
-    document.getElementById('resultsCount').innerHTML = `Found <strong>${filtered.length}</strong> matching global opportunities${gpaNote} — Page ${currentPage} of ${totalPages}`;
+    document.getElementById('resultsCount').innerHTML = `Found <strong>${filtered.length}</strong> matching opportunities${gpaNote} — Page ${currentPage} of ${totalPages}`;
 
     if (filtered.length === 0) {
         grid.innerHTML = `
@@ -66,7 +66,7 @@ function renderMatrix() {
             countdownMarkup = `<span class="countdown-text warning">Opens in ${item.metrics.days} days</span>`;
         } else {
             statusMarkup = `<span class="status-pill closed">Cycle Closed</span>`;
-            countdownMarkup = `<span class="countdown-text neutral">Re-opens Next Cycle</span>`;
+            countdownMarkup = `<span class="countdown-text neutral">Re-opens Next Cycle (${item.nextCycleOpening})</span>`;
         }
 
         return `
@@ -113,11 +113,10 @@ window.changeMatrixPage = function(page) {
     window.scrollTo({ top: 400, behavior: 'smooth' });
 };
 
-// Daily Midnight Auto-Update Mechanism
+// Midnight Daily Scheduler
 function initMidnightScheduler() {
     const now = new Date();
     const millisTillMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0) - now;
-    
     setTimeout(() => {
         updateSyncTimestamp();
         renderMatrix();
