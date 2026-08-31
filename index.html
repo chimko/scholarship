@@ -173,7 +173,7 @@
             box-shadow: 0 0 0 3px var(--primary-glow);
         }
 
-        /* Anime-Style Genre Filter Tags */
+        /* Multi-Select Anime-Style Genre Filter Tags */
         .genre-section {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -231,6 +231,22 @@
             align-items: center;
             margin-bottom: 1.5rem;
             font-size: 0.9rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .per-page-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .per-page-selector select {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.85rem;
+            width: auto;
         }
 
         .scholarship-grid {
@@ -336,7 +352,7 @@
 
         .btn-apply:hover { opacity: 0.9; }
 
-        /* Pagination Bar Styles */
+        /* Pagination Bar */
         .pagination-bar {
             display: flex;
             justify-content: center;
@@ -463,9 +479,9 @@
             </div>
         </div>
 
-        <!-- Anime-Style Genre Filter Tags System -->
+        <!-- Multi-Select Anime-Style Genre Filter Tags System -->
         <div class="genre-section">
-            <h3>Filter Categories & Funding Genres</h3>
+            <h3>Multi-Select Categories & Funding Genres (Click to Combine)</h3>
             <div class="genre-tags" id="genreTagsContainer">
                 <div class="tag-pill active" data-filter="all">All Genres</div>
                 <div class="tag-pill" data-filter="fully-funded">Fully Funded</div>
@@ -478,10 +494,18 @@
             </div>
         </div>
 
-        <!-- Metric Bar -->
+        <!-- Metric Bar with Items Per Page Selector -->
         <div class="metrics-bar">
             <div id="resultsCount">Loading global matrix...</div>
-            <div id="activeFilterDisplay" style="font-size: 0.825rem; color: var(--text-muted);">Active Genre: All Genres</div>
+            <div class="per-page-selector">
+                <label for="perPageSelect">Show per page:</label>
+                <select id="perPageSelect">
+                    <option value="6">6</option>
+                    <option value="12" selected>12</option>
+                    <option value="24">24</option>
+                    <option value="9999">All</option>
+                </select>
+            </div>
         </div>
 
         <!-- Cards Container -->
@@ -512,7 +536,7 @@
             "Uzbekistan", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
         ];
 
-        // Comprehensive Global Master Database Spanning Multiple Regions & Categories
+        // Expanded Global Master Database Spanning Multiple Regions & Categories
         const MASTER_DATABASE = [
             {
                 id: "csc-type-a-china",
@@ -720,9 +744,8 @@
             }
         ];
 
-        let currentGenreFilter = "all";
+        let activeGenreFilters = ["all"];
         let currentPage = 1;
-        const itemsPerPage = 6;
 
         function populateCountries() {
             const originSelect = document.getElementById('origin');
@@ -759,6 +782,8 @@
             const level = document.getElementById('level').value;
             const discipline = document.getElementById('discipline').value;
             const gpaInput = parseFloat(document.getElementById('gpa').value);
+            const perPageVal = parseInt(document.getElementById('perPageSelect').value);
+            
             const grid = document.getElementById('scholarshipGrid');
             const paginationBar = document.getElementById('paginationBar');
 
@@ -770,46 +795,48 @@
                 const matchTarget = target === "ALL" || item.hostCountry === target;
                 const matchLevel = level === "ALL" || item.level === level;
                 const matchDiscipline = discipline === "ALL" || item.disciplines.includes(discipline);
-                
-                // GPA check is optional: if input is empty or invalid, skip restriction
                 const matchGpa = isNaN(gpaInput) || item.minGpa <= gpaInput;
 
-                // Genre Tag Filtering
+                // Multi-select genre logic: if "all" is active, pass all. Otherwise match any active genre tag.
                 let matchGenre = true;
-                if (currentGenreFilter === "fully-funded") matchGenre = item.fundingType === "fully-funded";
-                else if (currentGenreFilter === "partial") matchGenre = item.fundingType === "partial";
-                else if (currentGenreFilter === "active") matchGenre = item.metrics.status === "ACTIVE";
-                else if (currentGenreFilter === "upcoming") matchGenre = item.metrics.status === "UPCOMING";
-                else if (currentGenreFilter === "closed") matchGenre = item.metrics.status === "CLOSED";
-                else if (currentGenreFilter === "government") matchGenre = item.category === "government";
-                else if (currentGenreFilter === "university") matchGenre = item.category === "university";
+                if (!activeGenreFilters.includes("all") && activeGenreFilters.length > 0) {
+                    matchGenre = activeGenreFilters.some(genre => {
+                        if (genre === "fully-funded") return item.fundingType === "fully-funded";
+                        if (genre === "partial") return item.fundingType === "partial";
+                        if (genre === "active") return item.metrics.status === "ACTIVE";
+                        if (genre === "upcoming") return item.metrics.status === "UPCOMING";
+                        if (genre === "closed") return item.metrics.status === "CLOSED";
+                        if (genre === "government") return item.category === "government";
+                        if (genre === "university") return item.category === "university";
+                        return false;
+                    });
+                }
 
                 return matchOrigin && matchTarget && matchLevel && matchDiscipline && matchGpa && matchGenre;
             });
 
             // Pagination Calculations
-            const totalPages = Math.ceil(filtered.length / itemsPerPage) || 1;
+            const totalPages = perPageVal >= 9999 ? 1 : (Math.ceil(filtered.length / perPageVal) || 1);
             if (currentPage > totalPages) currentPage = 1;
 
-            const startIndex = (currentPage - 1) * itemsPerPage;
-            const paginatedItems = filtered.slice(startIndex, startIndex + itemsPerPage);
+            const startIndex = (currentPage - 1) * perPageVal;
+            const paginatedItems = perPageVal >= 9999 ? filtered : filtered.slice(startIndex, startIndex + perPageVal);
 
             let gpaNote = isNaN(gpaInput) ? " (GPA optional)" : ` (GPA ≤ ${gpaInput})`;
             document.getElementById('resultsCount').innerHTML = `Found <strong>${filtered.length}</strong> matching global opportunities${gpaNote} — Page ${currentPage} of ${totalPages}`;
-            document.getElementById('activeFilterDisplay').textContent = `Active Genre: ${document.querySelector('.tag-pill.active').textContent}`;
 
             if (filtered.length === 0) {
                 grid.innerHTML = `
                     <div class="empty-state">
-                        <h3>No scholarships found matching these exact parameters</h3>
-                        <p>Try resetting filters, choosing "All Destinations", or selecting "All Genres" to view available global pathways.</p>
+                        <h3>No scholarships found matching these parameters</h3>
+                        <p>Try resetting filters or unselecting active tags.</p>
                     </div>
                 `;
                 paginationBar.innerHTML = "";
                 return;
             }
 
-            // Render Grid Cards
+            // Render Cards
             grid.innerHTML = paginatedItems.map(item => {
                 let statusMarkup = "";
                 let countdownMarkup = "";
@@ -850,22 +877,23 @@
                 `;
             }).join('');
 
-            // Render Pagination Buttons
-            let paginationHTML = `
-                <button class="page-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(${currentPage - 1})">Previous</button>
-            `;
-
-            for (let i = 1; i <= totalPages; i++) {
-                paginationHTML += `
-                    <button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>
+            // Render Pagination Buttons if not viewing "All"
+            if (perPageVal >= 9999) {
+                paginationBar.innerHTML = "";
+            } else {
+                let paginationHTML = `
+                    <button class="page-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(${currentPage - 1})">Previous</button>
                 `;
+                for (let i = 1; i <= totalPages; i++) {
+                    paginationHTML += `
+                        <button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>
+                    `;
+                }
+                paginationHTML += `
+                    <button class="page-btn ${currentPage === totalPages ? 'disabled' : ''}" ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${currentPage + 1})">Next</button>
+                `;
+                paginationBar.innerHTML = paginationHTML;
             }
-
-            paginationHTML += `
-                <button class="page-btn ${currentPage === totalPages ? 'disabled' : ''}" ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${currentPage + 1})">Next</button>
-            `;
-
-            paginationBar.innerHTML = paginationHTML;
         }
 
         function changePage(page) {
@@ -874,13 +902,37 @@
             window.scrollTo({ top: 400, behavior: 'smooth' });
         }
 
-        // Setup Genre Click Handlers
+        // Multi-Select Genre Click Handlers
         document.querySelectorAll('.tag-pill').forEach(pill => {
             pill.addEventListener('click', (e) => {
-                document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
-                e.target.classList.add('active');
-                currentGenreFilter = e.target.getAttribute('data-filter');
-                currentPage = 1; // Reset to page 1 on filter switch
+                const filter = e.target.getAttribute('data-filter');
+                
+                if (filter === "all") {
+                    activeGenreFilters = ["all"];
+                    document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
+                    e.target.classList.add('active');
+                } else {
+                    // Remove 'all' if active
+                    const allPill = document.querySelector('.tag-pill[data-filter="all"]');
+                    if (allPill) allPill.classList.remove('active');
+                    
+                    if (activeGenreFilters.includes("all")) {
+                        activeGenreFilters = [];
+                    }
+
+                    if (activeGenreFilters.includes(filter)) {
+                        activeGenreFilters = activeGenreFilters.filter(f => f !== filter);
+                        e.target.classList.remove('active');
+                        if (activeGenreFilters.length === 0) {
+                            activeGenreFilters = ["all"];
+                            if (allPill) allPill.classList.add('active');
+                        }
+                    } else {
+                        activeGenreFilters.push(filter);
+                        e.target.classList.add('active');
+                    }
+                }
+                currentPage = 1;
                 renderScholarships();
             });
         });
@@ -889,9 +941,9 @@
             populateCountries();
             renderScholarships();
 
-            document.querySelectorAll('.filter-panel select, .filter-panel input').forEach(element => {
+            document.querySelectorAll('.filter-panel select, .filter-panel input, #perPageSelect').forEach(element => {
                 element.addEventListener('change', () => {
-                    currentPage = 1; // Reset to page 1 on search change
+                    currentPage = 1;
                     renderScholarships();
                 });
                 element.addEventListener('input', () => {
