@@ -11,13 +11,14 @@
         :root {
             --bg-base: #080c14;
             --bg-surface: #0f172a;
-            --bg-card: rgba(15, 23, 42, 0.75);
+            --bg-card: rgba(15, 23, 42, 0.85);
             --border: rgba(255, 255, 255, 0.1);
             --border-hover: rgba(59, 130, 246, 0.5);
             --primary: #3b82f6;
             --primary-glow: rgba(59, 130, 246, 0.25);
             --accent-green: #10b981;
             --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --danger: #ef4444;
@@ -47,7 +48,6 @@
             margin: 0 auto;
         }
 
-        /* Top Bar Info */
         .top-meta-bar {
             display: flex;
             justify-content: space-between;
@@ -92,10 +92,8 @@
             padding: 0.35rem 0.85rem;
             border-radius: 8px;
             font-size: 0.8rem;
-            letter-spacing: 0.02em;
         }
 
-        /* Header */
         header {
             text-align: center;
             margin-bottom: 2rem;
@@ -104,7 +102,6 @@
         header h1 {
             font-size: 2.8rem;
             font-weight: 800;
-            letter-spacing: -0.025em;
             background: linear-gradient(135deg, #ffffff 0%, #93c5fd 50%, #c084fc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -131,7 +128,6 @@
             line-height: 1.4;
         }
 
-        /* Control Panel */
         .filter-panel {
             background: var(--bg-card);
             backdrop-filter: blur(16px);
@@ -178,24 +174,54 @@
             box-shadow: 0 0 0 3px var(--primary-glow);
         }
 
-        .checkbox-group {
+        /* Anime-Style Genre Filter Tags */
+        .genre-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .genre-section h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .genre-tags {
             display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-top: auto;
-            padding-bottom: 0.5rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.4rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s ease;
             user-select: none;
         }
 
-        .checkbox-group input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--primary);
-            cursor: pointer;
+        .tag-pill:hover {
+            border-color: var(--primary);
+            color: var(--text-main);
         }
 
-        /* Sorting & Metrics Bar */
+        .tag-pill.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
         .metrics-bar {
             background: rgba(15, 23, 42, 0.4);
             border: 1px solid var(--border);
@@ -204,25 +230,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
             margin-bottom: 1.5rem;
             font-size: 0.9rem;
         }
 
-        .sort-controls {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .sort-controls select {
-            padding: 0.4rem 0.75rem;
-            font-size: 0.85rem;
-            width: auto;
-        }
-
-        /* Card Grid */
         .scholarship-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
@@ -270,17 +281,8 @@
             text-transform: uppercase;
         }
 
-        .badge-full {
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--accent-green);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-
-        .badge-partial {
-            background: rgba(139, 92, 246, 0.15);
-            color: var(--accent-purple);
-            border: 1px solid rgba(139, 92, 246, 0.3);
-        }
+        .badge-full { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-partial { background: rgba(139, 92, 246, 0.15); color: var(--accent-purple); border: 1px solid rgba(139, 92, 246, 0.3); }
 
         .status-pill {
             display: inline-block;
@@ -304,9 +306,7 @@
             margin-bottom: 1.25rem;
         }
 
-        .card-details strong {
-            color: var(--text-main);
-        }
+        .card-details strong { color: var(--text-main); }
 
         .card-footer {
             display: flex;
@@ -317,11 +317,7 @@
             margin-top: auto;
         }
 
-        .countdown-text {
-            font-size: 0.825rem;
-            font-weight: 700;
-        }
-
+        .countdown-text { font-size: 0.825rem; font-weight: 700; }
         .countdown-text.urgent { color: var(--danger); }
         .countdown-text.warning { color: var(--warning); }
         .countdown-text.safe { color: var(--accent-green); }
@@ -354,20 +350,19 @@
         <!-- Top Status Bar -->
         <div class="top-meta-bar">
             <div class="live-badge">
-                <span class="pulse-dot"></span> Live Dynamic Database Engine
+                <span class="pulse-dot"></span> Universal Global Database Active
             </div>
             <div class="update-timestamp" id="lastUpdatedBox">
-                Database Last Synced: <strong style="color: #60a5fa;">Aug 31, 2026</strong>
+                Database Synced: <strong style="color: #60a5fa;">Aug 31, 2026</strong>
             </div>
         </div>
 
-        <!-- Header -->
         <header>
             <h1>Global Scholarship Matrix</h1>
-            <p>Complete global eligibility portal tracking active, upcoming, and recurring scholarships across all destinations.</p>
+            <p>Universal multi-country portal tracking government, bilateral, and institutional scholarships for students worldwide.</p>
             
             <div class="disclaimer-box">
-                <strong>Official Verification Notice:</strong> While deadlines and opening countdowns calculate automatically in real time, always verify specific criteria, course exceptions, and document guidelines on the official provider portal prior to submitting your application.
+                <strong>Official Verification Notice:</strong> Deadlines and countdowns update dynamically. Always check official provider guidelines and residency criteria prior to submission.
             </div>
         </header>
 
@@ -377,7 +372,6 @@
                 <label for="origin">Where do you live? (Nationality)</label>
                 <select id="origin">
                     <option value="ALL">All Countries / Worldwide</option>
-                    <!-- Populated dynamically with all 195 world countries -->
                 </select>
             </div>
 
@@ -385,6 +379,7 @@
                 <label for="target">Destination Country</label>
                 <select id="target">
                     <option value="ALL">Any Destination Worldwide</option>
+                    <option value="China">China</option>
                     <option value="United Kingdom">United Kingdom</option>
                     <option value="United States">United States</option>
                     <option value="South Korea">South Korea</option>
@@ -393,14 +388,11 @@
                     <option value="Japan">Japan</option>
                     <option value="Canada">Canada</option>
                     <option value="Australia">Australia</option>
-                    <option value="China">China</option>
                     <option value="Turkey">Turkey</option>
                     <option value="Saudi Arabia">Saudi Arabia</option>
                     <option value="Singapore">Singapore</option>
                     <option value="Switzerland">Switzerland</option>
                     <option value="Netherlands">Netherlands</option>
-                    <option value="Sweden">Sweden</option>
-                    <option value="New Zealand">New Zealand</option>
                 </select>
             </div>
 
@@ -427,40 +419,30 @@
             </div>
 
             <div class="form-group">
-                <label for="statusFilter">Opportunity Status</label>
-                <select id="statusFilter">
-                    <option value="ALL">All (Active, Upcoming & Closed)</option>
-                    <option value="ACTIVE">Applications Currently Open</option>
-                    <option value="UPCOMING">Opening Soon / Next Cycle</option>
-                    <option value="CLOSED">Closed for Current Cycle</option>
-                </select>
+                <label for="gpa">Min GPA Threshold (Optional)</label>
+                <input type="number" id="gpa" step="0.01" min="0" max="4.0" placeholder="Leave blank for any GPA">
             </div>
-
-            <div class="form-group">
-                <label for="gpa">Min GPA Threshold</label>
-                <input type="number" id="gpa" step="0.01" min="0" max="4.0" placeholder="e.g., 3.5">
-            </div>
-
-            <label class="checkbox-group">
-                <!-- Inactive / Unchecked by default as requested -->
-                <input type="checkbox" id="fullyFundedOnly">
-                <span>Fully Funded Only</span>
-            </label>
         </div>
 
-        <!-- Metric Bar with Sorting -->
-        <div class="metrics-bar">
-            <div id="resultsCount">Loading scholarship matrix...</div>
-            
-            <div class="sort-controls">
-                <label for="sortBy" style="font-size: 0.85rem; color: var(--text-muted);">Sort By:</label>
-                <select id="sortBy">
-                    <option value="TIMELINE">Next Action / Days Left</option>
-                    <option value="NAME">Scholarship Name (A-Z)</option>
-                    <option value="GPA_ASC">Lowest GPA Required First</option>
-                    <option value="GPA_DESC">Highest GPA Required First</option>
-                </select>
+        <!-- Anime-Style Genre Filter Tags System -->
+        <div class="genre-section">
+            <h3>Filter Categories & Funding Genres</h3>
+            <div class="genre-tags" id="genreTagsContainer">
+                <div class="tag-pill active" data-filter="all">All Genres</div>
+                <div class="tag-pill" data-filter="fully-funded">Fully Funded</div>
+                <div class="tag-pill" data-filter="partial">Partial / Grant</div>
+                <div class="tag-pill" data-filter="active">🟢 Active Now</div>
+                <div class="tag-pill" data-filter="upcoming">🟡 Upcoming Cycle</div>
+                <div class="tag-pill" data-filter="closed">🔴 Closed / Re-opening</div>
+                <div class="tag-pill" data-filter="government">Government / National</div>
+                <div class="tag-pill" data-filter="university">University / Institutional</div>
             </div>
+        </div>
+
+        <!-- Metric Bar -->
+        <div class="metrics-bar">
+            <div id="resultsCount">Loading global matrix...</div>
+            <div id="activeFilterDisplay" style="font-size: 0.825rem; color: var(--text-muted);">Active Genre: All Genres</div>
         </div>
 
         <!-- Cards Container -->
@@ -468,7 +450,6 @@
     </div>
 
     <script>
-        // Full List of World Countries for the Origin Selector
         const ALL_COUNTRIES = [
             "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria",
             "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
@@ -484,25 +465,42 @@
             "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand",
             "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama",
             "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda",
-            "Saint Kitts and Nevis", "Saint Lucia", "Samoa", "San Marino", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore",
-            "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan",
-            "Suriname", "Sweden", "Switzerland", "Syria", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga",
-            "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States",
-            "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+            "Saudi Arabia", "Senegal", "Serbia", "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sri Lanka",
+            "Sweden", "Switzerland", "Taiwan", "Thailand", "Turkey", "Ukraine", "United Arab Emirates", "United Kingdom", "United States",
+            "Uzbekistan", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
         ];
 
-        // Master Global Database (Active, Upcoming & Closed Across All Tiers)
+        // Expanded Global Master Database spanning multiple global regions
         const MASTER_DATABASE = [
+            {
+                id: "csc-type-a-china",
+                name: "Chinese Government Scholarship (CSC Type A)",
+                hostCountry: "China",
+                eligibleOrigins: ["ALL"],
+                level: "Postgraduate",
+                disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics", "Medical & Life Sciences"],
+                minGpa: 2.80,
+                fullyFunded: true,
+                fundingType: "fully-funded",
+                category: "government",
+                coverage: "Full Tuition + Accommodation + Monthly Stipend + Insurance",
+                openingDate: "2026-11-01",
+                deadline: "2027-03-31",
+                nextCycleOpening: "2026-11-01",
+                link: "https://www.campuschina.org/"
+            },
             {
                 id: "rhodes-uk",
                 name: "Rhodes Scholarship",
                 hostCountry: "United Kingdom",
                 eligibleOrigins: ["ALL"],
                 level: "Postgraduate",
-                disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics", "Medical & Life Sciences"],
+                disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics"],
                 minGpa: 3.70,
                 fullyFunded: true,
-                coverage: "100% Tuition + £18,180/yr Stipend + Flight & Visa",
+                fundingType: "fully-funded",
+                category: "government",
+                coverage: "100% Tuition + Living Stipend + Flight & Visa",
                 openingDate: "2026-06-01",
                 deadline: "2026-10-01",
                 nextCycleOpening: "2027-06-01",
@@ -517,41 +515,13 @@
                 disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics"],
                 minGpa: 3.20,
                 fullyFunded: true,
-                coverage: "Full Tuition + 1,000,000 KRW/mo Stipend + Airfare + Korean Language Prep",
+                fundingType: "fully-funded",
+                category: "government",
+                coverage: "Tuition + Monthly Allowance + Language Training",
                 openingDate: "2027-02-01",
                 deadline: "2027-03-15",
                 nextCycleOpening: "2027-02-01",
                 link: "https://www.studyinkorea.go.kr/"
-            },
-            {
-                id: "erasmus-eu",
-                name: "Erasmus Mundus Joint Masters",
-                hostCountry: "Europe (Multi-Country)",
-                eligibleOrigins: ["ALL"],
-                level: "Postgraduate",
-                disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics"],
-                minGpa: 3.00,
-                fullyFunded: true,
-                coverage: "Full Tuition + €1,400/mo Allowance + Full Mobility Travel Grant",
-                openingDate: "2026-10-01",
-                deadline: "2027-01-15",
-                nextCycleOpening: "2026-10-01",
-                link: "https://erasmus-plus.ec.europa.eu/"
-            },
-            {
-                id: "chevening-uk",
-                name: "Chevening Scholarship",
-                hostCountry: "United Kingdom",
-                eligibleOrigins: ["ALL"],
-                level: "Postgraduate",
-                disciplines: ["Humanities & Literature", "Social Sciences", "Business & Economics"],
-                minGpa: 2.80,
-                fullyFunded: true,
-                coverage: "Full Master's Tuition + Living Allowance + Return Flights",
-                openingDate: "2026-09-12",
-                deadline: "2026-11-03",
-                nextCycleOpening: "2026-09-12",
-                link: "https://www.chevening.org/"
             },
             {
                 id: "fulbright-us",
@@ -562,11 +532,30 @@
                 disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics"],
                 minGpa: 3.50,
                 fullyFunded: true,
+                fundingType: "fully-funded",
+                category: "government",
                 coverage: "Full Tuition + Health Insurance + Monthly Living Stipend + Airfare",
                 openingDate: "2026-02-01",
                 deadline: "2026-05-15",
                 nextCycleOpening: "2027-02-01",
                 link: "https://fulbrightonline.org/"
+            },
+            {
+                id: "erasmus-eu",
+                name: "Erasmus Mundus Joint Masters",
+                hostCountry: "Europe (Multi-Country)",
+                eligibleOrigins: ["ALL"],
+                level: "Postgraduate",
+                disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Business & Economics"],
+                minGpa: 3.00,
+                fullyFunded: true,
+                fundingType: "fully-funded",
+                category: "government",
+                coverage: "Full Tuition + €1,400/mo Allowance + Travel Grant",
+                openingDate: "2026-10-01",
+                deadline: "2027-01-15",
+                nextCycleOpening: "2026-10-01",
+                link: "https://erasmus-plus.ec.europa.eu/"
             },
             {
                 id: "daad-de",
@@ -577,6 +566,8 @@
                 disciplines: ["Social Sciences", "STEM", "Business & Economics"],
                 minGpa: 3.00,
                 fullyFunded: true,
+                fundingType: "fully-funded",
+                category: "government",
                 coverage: "€934/mo Stipend + Health Insurance + Travel Allowance",
                 openingDate: "2026-08-01",
                 deadline: "2026-10-31",
@@ -592,7 +583,9 @@
                 disciplines: ["Humanities & Literature", "Social Sciences", "STEM"],
                 minGpa: 3.10,
                 fullyFunded: true,
-                coverage: "Exemption of Entrance Fees & Tuition + ¥117,000/mo Stipend",
+                fundingType: "fully-funded",
+                category: "government",
+                coverage: "Exemption of Tuition + ¥117,000/mo Stipend",
                 openingDate: "2027-04-15",
                 deadline: "2027-05-30",
                 nextCycleOpening: "2027-04-15",
@@ -607,6 +600,8 @@
                 disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Medical & Life Sciences"],
                 minGpa: 2.80,
                 fullyFunded: true,
+                fundingType: "fully-funded",
+                category: "government",
                 coverage: "University Placement + Tuition + Accommodation + Monthly Allowance",
                 openingDate: "2027-01-10",
                 deadline: "2027-02-20",
@@ -622,60 +617,18 @@
                 disciplines: ["STEM", "Medical & Life Sciences"],
                 minGpa: 3.40,
                 fullyFunded: true,
-                coverage: "Full PhD Tuition + SGD 2,700/mo Stipend + One-time Airfare & Settlement Grant",
+                fundingType: "fully-funded",
+                category: "university",
+                coverage: "Full PhD Tuition + SGD 2,700/mo Stipend + Airfare",
                 openingDate: "2026-09-01",
                 deadline: "2026-12-01",
                 nextCycleOpening: "2026-09-01",
                 link: "https://www.a-star.edu.sg/singa"
-            },
-            {
-                id: "switzerland-excellence",
-                name: "Swiss Government Excellence Scholarships",
-                hostCountry: "Switzerland",
-                eligibleOrigins: ["ALL"],
-                level: "PhD",
-                disciplines: ["STEM", "Humanities & Literature", "Social Sciences", "Medical & Life Sciences"],
-                minGpa: 3.50,
-                fullyFunded: true,
-                coverage: "CHF 1,920/mo Allowance + Tuition Exemption + Health Insurance",
-                openingDate: "2026-08-10",
-                deadline: "2026-11-15",
-                nextCycleOpening: "2026-08-10",
-                link: "https://www.sbfi.admin.ch/"
-            },
-            {
-                id: "holland-scholarship",
-                name: "NL Scholarship (formerly Holland Scholarship)",
-                hostCountry: "Netherlands",
-                eligibleOrigins: ["ALL"],
-                level: "Undergraduate",
-                disciplines: ["Humanities & Literature", "STEM", "Business & Economics"],
-                minGpa: 3.00,
-                fullyFunded: false,
-                coverage: "€5,000 One-time Financial Grant for First Year",
-                openingDate: "2026-11-01",
-                deadline: "2027-05-01",
-                nextCycleOpening: "2026-11-01",
-                link: "https://www.studyinnl.org/"
-            },
-            {
-                id: "vanier-ca",
-                name: "Vanier Canada Graduate Scholarships",
-                hostCountry: "Canada",
-                eligibleOrigins: ["ALL"],
-                level: "PhD",
-                disciplines: ["STEM", "Medical & Life Sciences", "Social Sciences"],
-                minGpa: 3.70,
-                fullyFunded: true,
-                coverage: "$50,000 per year for 3 years",
-                openingDate: "2026-07-01",
-                deadline: "2026-11-01",
-                nextCycleOpening: "2027-07-01",
-                link: "https://vanier.gc.ca/"
             }
         ];
 
-        // Populate Country Select Dropdown
+        let currentGenreFilter = "all";
+
         function populateCountries() {
             const originSelect = document.getElementById('origin');
             ALL_COUNTRIES.forEach(country => {
@@ -686,11 +639,9 @@
             });
         }
 
-        // Days calculation engine
         function calculateDateMetrics(openingStr, deadlineStr) {
             const today = new Date();
             today.setHours(0,0,0,0);
-
             const opening = new Date(openingStr);
             const deadline = new Date(deadlineStr);
             opening.setHours(0,0,0,0);
@@ -707,17 +658,12 @@
             }
         }
 
-        // Main Rendering Logic
         function renderScholarships() {
             const origin = document.getElementById('origin').value;
             const target = document.getElementById('target').value;
             const level = document.getElementById('level').value;
             const discipline = document.getElementById('discipline').value;
-            const statusFilter = document.getElementById('statusFilter').value;
-            const gpaInput = parseFloat(document.getElementById('gpa').value) || 0;
-            const fullyFundedOnly = document.getElementById('fullyFundedOnly').checked;
-            const sortBy = document.getElementById('sortBy').value;
-
+            const gpaInput = parseFloat(document.getElementById('gpa').value);
             const grid = document.getElementById('scholarshipGrid');
 
             let filtered = MASTER_DATABASE.map(item => {
@@ -728,38 +674,32 @@
                 const matchTarget = target === "ALL" || item.hostCountry === target;
                 const matchLevel = level === "ALL" || item.level === level;
                 const matchDiscipline = discipline === "ALL" || item.disciplines.includes(discipline);
-                const matchGpa = item.minGpa <= (gpaInput > 0 ? gpaInput : 4.0);
-                const matchFunding = !fullyFundedOnly || item.fullyFunded;
-                const matchStatus = statusFilter === "ALL" || item.metrics.status === statusFilter;
+                
+                // GPA check is optional: if input is empty or invalid, skip restriction
+                const matchGpa = isNaN(gpaInput) || item.minGpa <= gpaInput;
 
-                return matchOrigin && matchTarget && matchLevel && matchDiscipline && matchGpa && matchFunding && matchStatus;
+                // Genre Tag Filtering
+                let matchGenre = true;
+                if (currentGenreFilter === "fully-funded") matchGenre = item.fundingType === "fully-funded";
+                else if (currentGenreFilter === "partial") matchGenre = item.fundingType === "partial";
+                else if (currentGenreFilter === "active") matchGenre = item.metrics.status === "ACTIVE";
+                else if (currentGenreFilter === "upcoming") matchGenre = item.metrics.status === "UPCOMING";
+                else if (currentGenreFilter === "closed") matchGenre = item.metrics.status === "CLOSED";
+                else if (currentGenreFilter === "government") matchGenre = item.category === "government";
+                else if (currentGenreFilter === "university") matchGenre = item.category === "university";
+
+                return matchOrigin && matchTarget && matchLevel && matchDiscipline && matchGpa && matchGenre;
             });
 
-            // Sorting logic
-            filtered.sort((a, b) => {
-                if (sortBy === "NAME") {
-                    return a.name.localeCompare(b.name);
-                } else if (sortBy === "GPA_ASC") {
-                    return a.minGpa - b.minGpa;
-                } else if (sortBy === "GPA_DESC") {
-                    return b.minGpa - a.minGpa;
-                } else {
-                    // Default TIMELINE sort: Active closing soon first, then upcoming opening soon, then closed
-                    const statusOrder = { "ACTIVE": 1, "UPCOMING": 2, "CLOSED": 3 };
-                    if (statusOrder[a.metrics.status] !== statusOrder[b.metrics.status]) {
-                        return statusOrder[a.metrics.status] - statusOrder[b.metrics.status];
-                    }
-                    return a.metrics.days - b.metrics.days;
-                }
-            });
-
-            document.getElementById('resultsCount').innerHTML = `Found <strong>${filtered.length}</strong> matching global opportunities`;
+            let gpaNote = isNaN(gpaInput) ? " (GPA filter optional / bypassed)" : ` (Filtered for GPA ≤ ${gpaInput})`;
+            document.getElementById('resultsCount').innerHTML = `Found <strong>${filtered.length}</strong> matching global opportunities${gpaNote}`;
+            document.getElementById('activeFilterDisplay').textContent = `Active Genre: ${document.querySelector('.tag-pill.active').textContent}`;
 
             if (filtered.length === 0) {
                 grid.innerHTML = `
                     <div class="empty-state">
-                        <h3>No scholarships found for these filter settings</h3>
-                        <p>Try clearing filters, selecting "All Levels", or unchecking funding restrictions.</p>
+                        <h3>No scholarships found matching these exact parameters</h3>
+                        <p>Try resetting filters, choosing "All Destinations", or selecting "All Genres" to view available global pathways.</p>
                     </div>
                 `;
                 return;
@@ -771,11 +711,7 @@
 
                 if (item.metrics.status === "ACTIVE") {
                     statusMarkup = `<span class="status-pill active">Applications Active</span>`;
-                    if (item.metrics.days <= 30) {
-                        countdownMarkup = `<span class="countdown-text urgent">Closing Soon: ${item.metrics.days} days left</span>`;
-                    } else {
-                        countdownMarkup = `<span class="countdown-text safe">${item.metrics.days} days left to apply</span>`;
-                    }
+                    countdownMarkup = `<span class="countdown-text safe">${item.metrics.days} days left to apply</span>`;
                 } else if (item.metrics.status === "UPCOMING") {
                     statusMarkup = `<span class="status-pill upcoming">Opening Soon</span>`;
                     countdownMarkup = `<span class="countdown-text warning">Opens in ${item.metrics.days} days (${item.openingDate})</span>`;
@@ -797,7 +733,7 @@
                             <div class="card-details">
                                 <p><strong>Host Country:</strong> ${item.hostCountry}</p>
                                 <p><strong>Degree Level:</strong> ${item.level}</p>
-                                <p><strong>Min GPA:</strong> ${item.minGpa.toFixed(2)} / 4.0</p>
+                                <p><strong>Min GPA Required:</strong> ${item.minGpa.toFixed(2)} / 4.0</p>
                                 <p><strong>Benefits:</strong> ${item.coverage}</p>
                             </div>
                         </div>
@@ -810,13 +746,21 @@
             }).join('');
         }
 
-        // Initialize App
+        // Setup Genre Click Handlers
+        document.querySelectorAll('.tag-pill').forEach(pill => {
+            pill.addEventListener('click', (e) => {
+                document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
+                e.target.classList.add('active');
+                currentGenreFilter = e.target.getAttribute('data-filter');
+                renderScholarships();
+            });
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             populateCountries();
             renderScholarships();
 
-            // Event Listeners for Live Interactivity
-            document.querySelectorAll('.filter-panel select, .filter-panel input, #sortBy').forEach(element => {
+            document.querySelectorAll('.filter-panel select, .filter-panel input').forEach(element => {
                 element.addEventListener('change', renderScholarships);
                 element.addEventListener('input', renderScholarships);
             });
