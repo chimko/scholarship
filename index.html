@@ -24,12 +24,7 @@
             --warning: #f59e0b;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-base);
@@ -41,360 +36,104 @@
                 radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
             background-attachment: fixed;
         }
-
-        .container {
-            max-width: 1350px;
-            margin: 0 auto;
-        }
-
+        .container { max-width: 1350px; margin: 0 auto; }
         .top-meta-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.75rem;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--text-muted);
+            border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
         }
-
         .live-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: var(--accent-green);
-            padding: 0.3rem 0.8rem;
-            border-radius: 9999px;
-            font-weight: 600;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent-green); padding: 0.3rem 0.8rem; border-radius: 9999px; font-weight: 600;
         }
-
         .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent-green);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--accent-green);
-            animation: pulse 2s infinite;
+            width: 8px; height: 8px; background-color: var(--accent-green); border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-green); animation: pulse 2s infinite;
         }
-
         @keyframes pulse {
             0% { transform: scale(0.95); opacity: 0.8; }
             50% { transform: scale(1.2); opacity: 1; }
             100% { transform: scale(0.95); opacity: 0.8; }
         }
-
         .update-timestamp {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            padding: 0.35rem 0.85rem;
-            border-radius: 8px;
-            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
+            padding: 0.35rem 0.85rem; border-radius: 8px; font-size: 0.8rem;
         }
-
-        header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
+        header { text-align: center; margin-bottom: 2rem; }
         header h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
+            font-size: 2.8rem; font-weight: 800;
             background: linear-gradient(135deg, #ffffff 0%, #93c5fd 50%, #c084fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem;
         }
-
-        header p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            max-width: 750px;
-            margin: 0 auto 1rem auto;
-        }
-
+        header p { color: var(--text-muted); font-size: 1.05rem; max-width: 750px; margin: 0 auto 1rem auto; }
         .disclaimer-box {
-            background: rgba(245, 158, 11, 0.08);
-            border: 1px solid rgba(245, 158, 11, 0.25);
-            border-radius: 10px;
-            padding: 0.75rem 1.25rem;
-            max-width: 900px;
-            margin: 0 auto;
-            font-size: 0.85rem;
-            color: #fcd34d;
-            text-align: center;
-            line-height: 1.4;
+            background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25);
+            border-radius: 10px; padding: 0.75rem 1.25rem; max-width: 900px; margin: 0 auto;
+            font-size: 0.85rem; color: #fcd34d; text-align: center; line-height: 1.4;
         }
-
         .filter-panel {
-            background: var(--bg-card);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            margin-bottom: 1.5rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 1.25rem;
+            background: var(--bg-card); backdrop-filter: blur(16px); border: 1px solid var(--border);
+            border-radius: 16px; padding: 1.5rem; margin-top: 1.5rem; margin-bottom: 1.5rem;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.25rem;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
         }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-
-        .form-group label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-        }
-
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+        .form-group label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
         select, input {
-            width: 100%;
-            background: var(--bg-surface);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 0.7rem 0.9rem;
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 0.9rem;
-            outline: none;
-            transition: all 0.2s ease;
+            width: 100%; background: var(--bg-surface); border: 1px solid var(--border);
+            color: var(--text-main); padding: 0.7rem 0.9rem; border-radius: 8px;
+            font-family: inherit; font-size: 0.9rem; outline: none; transition: all 0.2s ease;
         }
-
-        select:focus, input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-glow);
-        }
-
-        .genre-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 1.25rem 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .genre-section h3 {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-            margin-bottom: 0.75rem;
-        }
-
-        .genre-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
+        select:focus, input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+        .genre-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+        .genre-section h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 0.75rem; }
+        .genre-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
         .tag-pill {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-            padding: 0.4rem 0.85rem;
-            border-radius: 9999px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            user-select: none;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); color: var(--text-muted);
+            padding: 0.4rem 0.85rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 600;
+            cursor: pointer; transition: all 0.2s ease; user-select: none;
         }
-
-        .tag-pill:hover {
-            border-color: var(--primary);
-            color: var(--text-main);
-        }
-
-        .tag-pill.active {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-            box-shadow: 0 0 12px var(--primary-glow);
-        }
-
+        .tag-pill:hover { border-color: var(--primary); color: var(--text-main); }
+        .tag-pill.active { background: var(--primary); border-color: var(--primary); color: white; box-shadow: 0 0 12px var(--primary-glow); }
         .metrics-bar {
-            background: rgba(15, 23, 42, 0.4);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 0.85rem 1.25rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-            flex-wrap: wrap;
-            gap: 1rem;
+            background: rgba(15, 23, 42, 0.4); border: 1px solid var(--border); border-radius: 12px;
+            padding: 0.85rem 1.25rem; display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 1.5rem; font-size: 0.9rem; flex-wrap: wrap; gap: 1rem;
         }
-
-        .per-page-selector {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .per-page-selector select {
-            padding: 0.3rem 0.6rem;
-            font-size: 0.85rem;
-            width: auto;
-        }
-
-        .scholarship-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
+        .per-page-selector { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--text-muted); }
+        .per-page-selector select { padding: 0.3rem 0.6rem; font-size: 0.85rem; width: auto; }
+        .scholarship-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
         .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.25s ease;
-            position: relative;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+            padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;
+            transition: all 0.25s ease; position: relative;
         }
-
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: var(--border-hover);
-            box-shadow: 0 12px 24px -10px var(--primary-glow);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-            gap: 0.75rem;
-        }
-
-        .card-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            line-height: 1.35;
-        }
-
-        .badge {
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 0.25rem 0.55rem;
-            border-radius: 6px;
-            white-space: nowrap;
-            text-transform: uppercase;
-        }
-
+        .card:hover { transform: translateY(-4px); border-color: var(--border-hover); box-shadow: 0 12px 24px -10px var(--primary-glow); }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; gap: 0.75rem; }
+        .card-title { font-size: 1.15rem; font-weight: 700; line-height: 1.35; }
+        .badge { font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.55rem; border-radius: 6px; white-space: nowrap; text-transform: uppercase; }
         .badge-full { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
         .badge-partial { background: rgba(139, 92, 246, 0.15); color: var(--accent-purple); border: 1px solid rgba(139, 92, 246, 0.3); }
-
-        .status-pill {
-            display: inline-block;
-            font-size: 0.725rem;
-            font-weight: 700;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            margin-bottom: 0.8rem;
-        }
-
+        .status-pill { display: inline-block; font-size: 0.725rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 4px; margin-bottom: 0.8rem; }
         .status-pill.active { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
         .status-pill.upcoming { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
         .status-pill.closed { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
-
-        .card-details {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            margin-bottom: 1.25rem;
-        }
-
+        .card-details { display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.25rem; }
         .card-details strong { color: var(--text-main); }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--border);
-            padding-top: 1rem;
-            margin-top: auto;
-        }
-
+        .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 1rem; margin-top: auto; }
         .countdown-text { font-size: 0.825rem; font-weight: 700; }
-        .countdown-text.urgent { color: var(--danger); }
-        .countdown-text.warning { color: var(--warning); }
         .countdown-text.safe { color: var(--accent-green); }
+        .countdown-text.warning { color: var(--warning); }
         .countdown-text.neutral { color: var(--text-muted); }
-
-        .btn-apply {
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            padding: 0.45rem 0.9rem;
-            border-radius: 6px;
-            font-size: 0.825rem;
-            font-weight: 600;
-            transition: opacity 0.2s;
-        }
-
+        .btn-apply { background: var(--primary); color: white; text-decoration: none; padding: 0.45rem 0.9rem; border-radius: 6px; font-size: 0.825rem; font-weight: 600; transition: opacity 0.2s; }
         .btn-apply:hover { opacity: 0.9; }
-
-        .pagination-bar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.4rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .page-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 0.5rem 0.85rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .page-btn:hover:not(:disabled) {
-            border-color: var(--primary);
-            background: rgba(59, 130, 246, 0.1);
-        }
-
-        .page-btn.active {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-            box-shadow: 0 0 10px var(--primary-glow);
-        }
-
-        .page-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        .empty-state {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 4rem 1rem;
-            color: var(--text-muted);
-        }
+        .pagination-bar { display: flex; justify-content: center; align-items: center; gap: 0.4rem; margin-bottom: 3rem; flex-wrap: wrap; }
+        .page-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-main); padding: 0.5rem 0.85rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        .page-btn:hover:not(:disabled) { border-color: var(--primary); background: rgba(59, 130, 246, 0.1); }
+        .page-btn.active { background: var(--primary); border-color: var(--primary); color: white; box-shadow: 0 0 10px var(--primary-glow); }
+        .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .empty-state { grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: var(--text-muted); }
     </style>
 </head>
 <body>
@@ -405,16 +144,15 @@
                 <span class="pulse-dot"></span> Universal Global Database Active
             </div>
             <div class="update-timestamp" id="lastUpdatedBox">
-                Database Synced: <strong style="color: #60a5fa;">Aug 31, 2026</strong>
+                Database Synced: <strong id="syncDateText" style="color: #60a5fa;">Loading...</strong>
             </div>
         </div>
 
         <header>
             <h1>Global Scholarship Matrix</h1>
             <p>Universal multi-country portal tracking government, bilateral, and institutional scholarships for students worldwide.</p>
-            
             <div class="disclaimer-box">
-                <strong>Official Verification Notice:</strong> Deadlines and countdowns update dynamically. Always check official provider guidelines and residency criteria prior to submission.
+                <strong>Official Verification Notice:</strong> Deadlines and countdowns update dynamically every midnight. Always check official provider guidelines prior to submission.
             </div>
         </header>
 
@@ -422,11 +160,8 @@
         <div class="filter-panel">
             <div class="form-group">
                 <label for="origin">Where do you live? (Nationality)</label>
-                <select id="origin">
-                    <option value="ALL">All Countries / Worldwide</option>
-                </select>
+                <select id="origin"><option value="ALL">All Countries / Worldwide</option></select>
             </div>
-
             <div class="form-group">
                 <label for="target">Destination Country</label>
                 <select id="target">
@@ -441,7 +176,6 @@
                     <option value="Canada">Canada</option>
                     <option value="Australia">Australia</option>
                     <option value="Turkey">Turkey</option>
-                    <option value="Saudi Arabia">Saudi Arabia</option>
                     <option value="Singapore">Singapore</option>
                     <option value="Switzerland">Switzerland</option>
                     <option value="Netherlands">Netherlands</option>
@@ -450,7 +184,6 @@
                     <option value="Sweden">Sweden</option>
                 </select>
             </div>
-
             <div class="form-group">
                 <label for="level">Degree Level</label>
                 <select id="level">
@@ -460,7 +193,6 @@
                     <option value="PhD">PhD / Doctorate</option>
                 </select>
             </div>
-
             <div class="form-group">
                 <label for="discipline">Field of Study</label>
                 <select id="discipline">
@@ -472,7 +204,6 @@
                     <option value="Medical & Life Sciences">Medical & Life Sciences</option>
                 </select>
             </div>
-
             <div class="form-group">
                 <label for="gpa">Min GPA Threshold (Optional)</label>
                 <input type="number" id="gpa" step="0.01" min="0" max="4.0" placeholder="Optional filter">
@@ -515,281 +246,7 @@
         <div id="paginationBar" class="pagination-bar"></div>
     </div>
 
-    <script>
-        const ALL_COUNTRIES = [
-            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria",
-            "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
-            "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia",
-            "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica",
-            "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt",
-            "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon",
-            "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guyana", "Haiti",
-            "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy",
-            "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia",
-            "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia",
-            "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco",
-            "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand",
-            "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama",
-            "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda",
-            "Saudi Arabia", "Senegal", "Serbia", "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sri Lanka",
-            "Sweden", "Switzerland", "Taiwan", "Thailand", "Turkey", "Ukraine", "United Arab Emirates", "United Kingdom", "United States",
-            "Uzbekistan", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
-        ];
-
-        // Expanded Comprehensive Master Database (Generated to span 10+ pages automatically)
-        let MASTER_DATABASE = [
-            { id: "csc-type-a", name: "Chinese Government Scholarship (CSC Type A)", hostCountry: "China", eligibleOrigins: ["ALL"], levels: ["Undergraduate", "Postgraduate", "PhD"], disciplines: ["STEM", "Social Sciences", "Business & Economics"], minGpa: 2.80, fullyFunded: true, fundingType: "fully-funded", category: "government", coverage: "Full Tuition + Accommodation + Stipend", openingDate: "2026-11-01", deadline: "2027-03-31", nextCycleOpening: "2026-11-01", link: "https://www.campuschina.org/" },
-            { id: "rhodes-uk", name: "Rhodes Scholarship", hostCountry: "United Kingdom", eligibleOrigins: ["ALL"], levels: ["Postgraduate", "PhD"], disciplines: ["Humanities & Literature", "Social Sciences", "STEM"], minGpa: 3.70, fullyFunded: true, fundingType: "fully-funded", category: "government", coverage: "100% Tuition + Living Stipend + Flight", openingDate: "2026-06-01", deadline: "2026-10-01", nextCycleOpening: "2027-06-01", link: "https://www.rhodeshouse.ox.ac.uk/" },
-            { id: "gks-kr", name: "Global Korea Scholarship (GKS)", hostCountry: "South Korea", eligibleOrigins: ["ALL"], levels: ["Undergraduate", "Postgraduate"], disciplines: ["STEM", "Business & Economics", "Humanities & Literature"], minGpa: 3.20, fullyFunded: true, fundingType: "fully-funded", category: "government", coverage: "Tuition + Monthly Allowance + Language Training", openingDate: "2027-02-01", deadline: "2027-03-15", nextCycleOpening: "2027-02-01", link: "https://www.studyinkorea.go.kr/" },
-            { id: "fulbright-us", name: "Fulbright Foreign Student Program", hostCountry: "United States", eligibleOrigins: ["ALL"], levels: ["Postgraduate", "PhD"], disciplines: ["STEM", "Social Sciences", "Business & Economics"], minGpa: 3.50, fullyFunded: true, fundingType: "fully-funded", category: "government", coverage: "Full Tuition + Insurance + Stipend + Airfare", openingDate: "2026-02-01", deadline: "2026-05-15", nextCycleOpening: "2027-02-01", link: "https://fulbrightonline.org/" },
-            { id: "erasmus-eu", name: "Erasmus Mundus Joint Masters", hostCountry: "Europe (Multi-Country)", eligibleOrigins: ["ALL"], levels: ["Postgraduate"], disciplines: ["Humanities & Literature", "Social Sciences", "STEM"], minGpa: 3.00, fullyFunded: true, fundingType: "fully-funded", category: "government", coverage: "Full Tuition + €1,400/mo Allowance + Travel", openingDate: "2026-10-01", deadline: "2027-01-15", nextCycleOpening: "2026-10-01", link: "https://erasmus-plus.ec.europa.eu/" },
-            { id: "daad-de", name: "DAAD EPOS Master's Scholarship", hostCountry: "Germany", eligibleOrigins: ["ALL"], levels: ["Postgraduate", "PhD"], disciplines: ["Social Sciences", "STEM", "Business & Economics"], minGpa: 3.00, fullyFunded: true, fundingType: "fully-funded", category: "government", coverage: "€934/mo Stipend + Insurance + Travel", openingDate: "2026-08-01", deadline: "2026-10-31", nextCycleOpening: "2026-08-01", link: "https://www.daad.de/" },
-            { id: "mext-jp", name: "MEXT Japanese Government Scholarship", hostCountry: "Japan", eligibleOrigins: ["ALL"], levels: ["Undergraduate", "Postgraduate", "PhD"], disciplines: ["STEM", "Humanities & Literature"], minGpa: 3.10, fullyFunded: true, fundingType: "fully-funded", category: "government", coverage: "Tuition Exemption + ¥117,000/mo Stipend", openingDate: "2027-04-15", deadline: "2027-05-30", nextCycleOpening: "2027-04-15", link: "https://www.mext.go.jp/" },
-            { id: "turkiye-tr", name: "Türkiye Bursları Scholarship", hostCountry: "Turkey", eligibleOrigins: ["ALL"], levels: ["Undergraduate", "Postgraduate", "PhD"], disciplines: ["Humanities & Literature", "Social Sciences", "STEM", "Medical & Life Sciences"], minGpa: 2.80, fullyFunded: true, fundingType: "fully-funded", category: "government", coverage: "Tuition + Accommodation + Monthly Allowance", openingDate: "2027-01-10", deadline: "2027-02-20", nextCycleOpening: "2027-01-10", link: "https://www.turkiyeburslari.gov.tr/" },
-            { id: "singa-sg", name: "SINGA Singapore Graduate Award", hostCountry: "Singapore", eligibleOrigins: ["ALL"], levels: ["PhD"], disciplines: ["STEM", "Medical & Life Sciences"], minGpa: 3.40, fullyFunded: true, fundingType: "fully-funded", category: "university", coverage: "Full PhD Tuition + SGD 2,700/mo Stipend + Airfare", openingDate: "2026-09-01", deadline: "2026-12-01", nextCycleOpening: "2026-09-01", link: "https://www.a-star.edu.sg/singa" },
-            { id: "chevening-uk", name: "Chevening Scholarship", hostCountry: "United Kingdom", eligibleOrigins: ["ALL"], levels: ["Postgraduate"], disciplines: ["Social Sciences", "Business & Economics"], minGpa: 2.80, fullyFunded: true, fundingType: "fully-funded", category: "government", coverage: "Full Tuition + Living Allowance + Flights", openingDate: "2026-09-12", deadline: "2026-11-03", nextCycleOpening: "2026-09-12", link: "https://www.chevening.org/" },
-            { id: "switzerland-excellence", name: "Swiss Government Excellence Scholarships", hostCountry: "Switzerland", eligibleOrigins: ["ALL"], levels: ["Postgraduate", "PhD"], disciplines: ["STEM", "Humanities & Literature", "Medical & Life Sciences"], minGpa: 3.50, fullyFunded: true, fundingType: "fully-funded", category: "government", coverage: "CHF 1,920/mo Allowance + Tuition Exemption", openingDate: "2026-08-10", deadline: "2026-11-15", nextCycleOpening: "2026-08-10", link: "https://www.sbfi.admin.ch/" },
-            { id: "holland-scholarship", name: "NL Scholarship", hostCountry: "Netherlands", eligibleOrigins: ["ALL"], levels: ["Undergraduate", "Postgraduate"], disciplines: ["STEM", "Business & Economics"], minGpa: 3.00, fullyFunded: false, fundingType: "partial", category: "government", coverage: "€5,000 One-time Financial Grant", openingDate: "2026-11-01", deadline: "2027-05-01", nextCycleOpening: "2026-11-01", link: "https://www.studyinnl.org/" },
-            { id: "eiffel-fr", name: "Eiffel Excellence Scholarship Program", hostCountry: "France", eligibleOrigins: ["ALL"], levels: ["Postgraduate", "PhD"], disciplines: ["Business & Economics", "Social Sciences", "STEM"], minGpa: 3.30, fullyFunded: true, fundingType: "fully-funded", category: "government", coverage: "€1,181/mo Allowance + Airfare + Insurance", openingDate: "2026-10-01", deadline: "2027-01-10", nextCycleOpening: "2026-10-01", link: "https://www.campusfrance.org/" },
-            { id: "maeci-it", name: "MAECI Italian Government Scholarships", hostCountry: "Italy", eligibleOrigins: ["ALL"], levels: ["Undergraduate", "Postgraduate", "PhD"], disciplines: ["Humanities & Literature", "STEM"], minGpa: 2.70, fullyFunded: true, fundingType: "fully-funded", category: "government", coverage: "€900/mo allowance + Tuition exemption", openingDate: "2027-03-01", deadline: "2027-05-31", nextCycleOpening: "2027-03-01", link: "https://studyinitaly.esteri.it/" },
-            { id: "swedish-institute", name: "Swedish Institute Scholarships", hostCountry: "Sweden", eligibleOrigins: ["ALL"], levels: ["Postgraduate"], disciplines: ["Social Sciences", "STEM"], minGpa: 3.00, fullyFunded: true, fundingType: "fully-funded", category: "government", coverage: "Full Tuition + SEK 12,000/month stipend", openingDate: "2027-02-01", deadline: "2027-02-28", nextCycleOpening: "2027-02-01", link: "https://si.se/" }
-        ];
-
-        // Programmatically generate robust additional entries to guarantee 10+ pages across countries
-        const countriesList = ["China", "United Kingdom", "United States", "South Korea", "Germany", "Japan", "Canada", "Australia", "Turkey", "France", "Italy", "Sweden", "Netherlands", "Switzerland", "Singapore"];
-        const degreeLevels = [["Undergraduate"], ["Postgraduate"], ["PhD"], ["Undergraduate", "Postgraduate"], ["Postgraduate", "PhD"]];
-        const fields = ["STEM", "Social Sciences", "Business & Economics", "Humanities & Literature", "Medical & Life Sciences"];
-        
-        for (let i = 1; i <= 100; i++) {
-            const country = countriesList[i % countriesList.length];
-            MASTER_DATABASE.push({
-                id: `global-gen-${i}`,
-                name: `${country} Global Academic Excellence Grant #${i}`,
-                hostCountry: country,
-                eligibleOrigins: ["ALL"],
-                levels: degreeLevels[i % degreeLevels.length],
-                disciplines: [fields[i % fields.length]],
-                minGpa: parseFloat((2.5 + (i % 10) * 0.1).toFixed(2)),
-                fullyFunded: i % 3 !== 0,
-                fundingType: i % 3 !== 0 ? "fully-funded" : "partial",
-                category: i % 2 === 0 ? "government" : "university",
-                coverage: i % 3 !== 0 ? "Full Tuition + Monthly Stipend + Accommodation" : "Partial Tuition Waiver + Research Grant",
-                openingDate: "2026-09-01",
-                deadline: "2027-04-15",
-                nextCycleOpening: "2026-09-01",
-                link: "https://www.education.gov"
-            });
-        }
-
-        let activeGenreFilters = ["all"];
-        let currentPage = 1;
-
-        function populateCountries() {
-            const originSelect = document.getElementById('origin');
-            ALL_COUNTRIES.forEach(country => {
-                const opt = document.createElement('option');
-                opt.value = country;
-                opt.textContent = country;
-                originSelect.appendChild(opt);
-            });
-        }
-
-        function calculateDateMetrics(openingStr, deadlineStr) {
-            const today = new Date();
-            today.setHours(0,0,0,0);
-            const opening = new Date(openingStr);
-            const deadline = new Date(deadlineStr);
-            opening.setHours(0,0,0,0);
-            deadline.setHours(0,0,0,0);
-
-            if (today < opening) {
-                const daysUntilOpen = Math.ceil((opening - today) / (1000 * 60 * 60 * 24));
-                return { status: "UPCOMING", days: daysUntilOpen, targetDate: openingStr };
-            } else if (today >= opening && today <= deadline) {
-                const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
-                return { status: "ACTIVE", days: daysLeft, targetDate: deadlineStr };
-            } else {
-                return { status: "CLOSED", days: -1, targetDate: deadlineStr };
-            }
-        }
-
-        function renderScholarships() {
-            const origin = document.getElementById('origin').value;
-            const target = document.getElementById('target').value;
-            const level = document.getElementById('level').value;
-            const discipline = document.getElementById('discipline').value;
-            const gpaInput = parseFloat(document.getElementById('gpa').value);
-            const perPageVal = parseInt(document.getElementById('perPageSelect').value);
-            
-            const grid = document.getElementById('scholarshipGrid');
-            const paginationBar = document.getElementById('paginationBar');
-
-            let filtered = MASTER_DATABASE.map(item => {
-                const metrics = calculateDateMetrics(item.openingDate, item.deadline);
-                return { ...item, metrics };
-            }).filter(item => {
-                const matchOrigin = origin === "ALL" || item.eligibleOrigins.includes("ALL") || item.eligibleOrigins.includes(origin);
-                const matchTarget = target === "ALL" || item.hostCountry === target;
-                const matchLevel = level === "ALL" || item.levels.includes(level);
-                const matchDiscipline = discipline === "ALL" || item.disciplines.includes(discipline);
-                
-                // GPA is strictly optional: if input is blank or NaN, it skips GPA checks entirely
-                const matchGpa = isNaN(gpaInput) || item.minGpa <= gpaInput;
-
-                // Genre filtering: only filters if "all" is NOT selected
-                let matchGenre = true;
-                if (!activeGenreFilters.includes("all") && activeGenreFilters.length > 0) {
-                    matchGenre = activeGenreFilters.some(genre => {
-                        if (genre === "fully-funded") return item.fundingType === "fully-funded";
-                        if (genre === "partial") return item.fundingType === "partial";
-                        if (genre === "active") return item.metrics.status === "ACTIVE";
-                        if (genre === "upcoming") return item.metrics.status === "UPCOMING";
-                        if (genre === "closed") return item.metrics.status === "CLOSED";
-                        if (genre === "government") return item.category === "government";
-                        if (genre === "university") return item.category === "university";
-                        return false;
-                    });
-                }
-
-                return matchOrigin && matchTarget && matchLevel && matchDiscipline && matchGpa && matchGenre;
-            });
-
-            // Pagination Calculations
-            const totalPages = perPageVal >= 9999 ? 1 : (Math.ceil(filtered.length / perPageVal) || 1);
-            if (currentPage > totalPages) currentPage = 1;
-
-            const startIndex = (currentPage - 1) * perPageVal;
-            const paginatedItems = perPageVal >= 9999 ? filtered : filtered.slice(startIndex, startIndex + perPageVal);
-
-            let gpaNote = isNaN(gpaInput) ? " (GPA optional / bypassed)" : ` (GPA ≤ ${gpaInput})`;
-            document.getElementById('resultsCount').innerHTML = `Found <strong>${filtered.length}</strong> matching global opportunities${gpaNote} — Page ${currentPage} of ${totalPages}`;
-
-            if (filtered.length === 0) {
-                grid.innerHTML = `
-                    <div class="empty-state">
-                        <h3>No scholarships found matching these parameters</h3>
-                        <p>Try resetting filters or unselecting active tags.</p>
-                    </div>
-                `;
-                paginationBar.innerHTML = "";
-                return;
-            }
-
-            // Render Cards
-            grid.innerHTML = paginatedItems.map(item => {
-                let statusMarkup = "";
-                let countdownMarkup = "";
-
-                if (item.metrics.status === "ACTIVE") {
-                    statusMarkup = `<span class="status-pill active">Applications Active</span>`;
-                    countdownMarkup = `<span class="countdown-text safe">${item.metrics.days} days left to apply</span>`;
-                } else if (item.metrics.status === "UPCOMING") {
-                    statusMarkup = `<span class="status-pill upcoming">Opening Soon</span>`;
-                    countdownMarkup = `<span class="countdown-text warning">Opens in ${item.metrics.days} days (${item.openingDate})</span>`;
-                } else {
-                    statusMarkup = `<span class="status-pill closed">Cycle Closed</span>`;
-                    countdownMarkup = `<span class="countdown-text neutral">Re-opens Next Cycle (${item.nextCycleOpening})</span>`;
-                }
-
-                return `
-                    <div class="card">
-                        <div>
-                            ${statusMarkup}
-                            <div class="card-header">
-                                <h2 class="card-title">${item.name}</h2>
-                                <span class="badge ${item.fullyFunded ? 'badge-full' : 'badge-partial'}">
-                                    ${item.fullyFunded ? 'Fully Funded' : 'Partial / Grant'}
-                                </span>
-                            </div>
-                            <div class="card-details">
-                                <p><strong>Host Country:</strong> ${item.hostCountry}</p>
-                                <p><strong>Degree Levels:</strong> ${item.levels.join(', ')}</p>
-                                <p><strong>Min GPA Required:</strong> ${item.minGpa.toFixed(2)} / 4.0</p>
-                                <p><strong>Benefits:</strong> ${item.coverage}</p>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            ${countdownMarkup}
-                            <a href="${item.link}" target="_blank" class="btn-apply">Verify Details</a>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            // Render Pagination Buttons
-            if (perPageVal >= 9999 || totalPages <= 1) {
-                paginationBar.innerHTML = "";
-            } else {
-                let paginationHTML = `
-                    <button class="page-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(${currentPage - 1})">Previous</button>
-                `;
-                for (let i = 1; i <= totalPages; i++) {
-                    paginationHTML += `
-                        <button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>
-                    `;
-                }
-                paginationHTML += `
-                    <button class="page-btn ${currentPage === totalPages ? 'disabled' : ''}" ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${currentPage + 1})">Next</button>
-                `;
-                paginationBar.innerHTML = paginationHTML;
-            }
-        }
-
-        function changePage(page) {
-            currentPage = page;
-            renderScholarships();
-            window.scrollTo({ top: 400, behavior: 'smooth' });
-        }
-
-        // Genre Click Handlers
-        document.querySelectorAll('.tag-pill').forEach(pill => {
-            pill.addEventListener('click', (e) => {
-                const filter = e.target.getAttribute('data-filter');
-                
-                if (filter === "all") {
-                    activeGenreFilters = ["all"];
-                    document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
-                    e.target.classList.add('active');
-                } else {
-                    const allPill = document.querySelector('.tag-pill[data-filter="all"]');
-                    if (allPill) allPill.classList.remove('active');
-                    
-                    if (activeGenreFilters.includes("all")) {
-                        activeGenreFilters = [];
-                    }
-
-                    if (activeGenreFilters.includes(filter)) {
-                        activeGenreFilters = activeGenreFilters.filter(f => f !== filter);
-                        e.target.classList.remove('active');
-                        if (activeGenreFilters.length === 0) {
-                            activeGenreFilters = ["all"];
-                            if (allPill) allPill.classList.add('active');
-                        }
-                    } else {
-                        activeGenreFilters.push(filter);
-                        e.target.classList.add('active');
-                    }
-                }
-                currentPage = 1;
-                renderScholarships();
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            populateCountries();
-            renderScholarships();
-
-            document.querySelectorAll('.filter-panel select, .filter-panel input, #perPageSelect').forEach(element => {
-                element.addEventListener('change', () => {
-                    currentPage = 1;
-                    renderScholarships();
-                });
-                element.addEventListener('input', () => {
-                    currentPage = 1;
-                    renderScholarships();
-                });
-            });
-        });
-    </script>
+    <!-- Link the modular JavaScript files -->
+    <script type="module" src="app.js"></script>
 </body>
 </html>
