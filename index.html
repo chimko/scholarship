@@ -173,7 +173,7 @@
             box-shadow: 0 0 0 3px var(--primary-glow);
         }
 
-        /* Multi-Select Anime-Style Genre Filter Tags */
+        /* Multi-Select Genre Filter Tags */
         .genre-section {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -352,7 +352,7 @@
 
         .btn-apply:hover { opacity: 0.9; }
 
-        /* Pagination Bar */
+        /* Pagination Controls */
         .pagination-bar {
             display: flex;
             justify-content: center;
@@ -536,7 +536,7 @@
             "Uzbekistan", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
         ];
 
-        // Expanded Global Master Database Spanning Multiple Regions & Categories
+        // Extended Universal Master Database with Active, Upcoming & Closed items across categories
         const MASTER_DATABASE = [
             {
                 id: "csc-type-a-china",
@@ -797,7 +797,7 @@
                 const matchDiscipline = discipline === "ALL" || item.disciplines.includes(discipline);
                 const matchGpa = isNaN(gpaInput) || item.minGpa <= gpaInput;
 
-                // Multi-select genre logic: if "all" is active, pass all. Otherwise match any active genre tag.
+                // Multi-select genre logic
                 let matchGenre = true;
                 if (!activeGenreFilters.includes("all") && activeGenreFilters.length > 0) {
                     matchGenre = activeGenreFilters.some(genre => {
@@ -877,7 +877,7 @@
                 `;
             }).join('');
 
-            // Render Pagination Buttons if not viewing "All"
+            // Render Pagination Buttons
             if (perPageVal >= 9999) {
                 paginationBar.innerHTML = "";
             } else {
@@ -912,7 +912,6 @@
                     document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
                     e.target.classList.add('active');
                 } else {
-                    // Remove 'all' if active
                     const allPill = document.querySelector('.tag-pill[data-filter="all"]');
                     if (allPill) allPill.classList.remove('active');
                     
